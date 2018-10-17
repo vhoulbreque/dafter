@@ -4,7 +4,7 @@ import zipfile
 
 import requests
 
-from utils import normalize_filename, normalize_name
+from .utils import normalize_filename, normalize_name
 
 
 class CSVDataset:
@@ -18,17 +18,19 @@ class CSVDataset:
             os.makedirs(self.save_path)
 
     def download(self):
+        print("Downloading {}...".format(self.name))
         folder = os.path.join(self.save_path, self.name)
         if not os.path.exists(folder):
             os.makedirs(folder)
 
         for i, url in enumerate(self.urls):
+            print(url)
             resp = requests.get(url)
 
-            f_name = normalize_filename(url)
             if len(self.urls) > 1:
-                f_name = f_name.split('.')
-                f_name = '.'.join(f_name[0:-1]) + '_{}'.format(i) + '.' + f_name[-1]
+                f_name = "{}_{}.csv".format(self.name, i)
+            else:
+                f_name = "{}.csv".format(self.name)
 
             f_name = os.path.join(folder, f_name)
 
