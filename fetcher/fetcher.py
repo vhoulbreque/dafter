@@ -11,6 +11,7 @@ def get_dataset(dataset_config):
     DATA_FOLDER = "data"
     if is_dataset_in_db(name):
         print("The dataset was already existing in database")
+        return
 
     if type == "csv":
         dataset = CSVDataset(name, urls, save_path=DATA_FOLDER)

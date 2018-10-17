@@ -1,4 +1,5 @@
 import sys
+import readline
 
 from fetcher.fetcher import get_dataset
 from fetcher.utils import get_config_dataset

@@ -2,6 +2,10 @@ import os
 import json
 
 
+DATA_FOLDER = os.path.join("data")
+DATASETS_CONFIG_FOLDER = "datasets"
+
+
 def normalize_filename(filename):
     f_name = filename.split('/')[-1]
     f_name = f_name.split('?')[0]
@@ -11,6 +15,8 @@ def normalize_filename(filename):
 def normalize_name(s):
     if s is None:
         return ''
+
+    s = s.replace('.json', '')
 
     new_s = ''
     for c in s:
@@ -22,8 +28,6 @@ def normalize_name(s):
 
 
 def get_config_dataset(datasetname):
-
-    DATASETS_CONFIG_FOLDER = "datasets"
 
     for config_file in os.listdir(DATASETS_CONFIG_FOLDER):
         cf = config_file.replace(".json", "")
@@ -41,12 +45,13 @@ def get_config_dataset(datasetname):
 
 def is_dataset_in_db(datasetname):
 
-    DATA_FOLDER = os.path.join("fetcher", "data")
+    datasetname = normalize_name(datasetname)
 
     folders = os.listdir(DATA_FOLDER)
     if datasetname in folders:
         dataset_folder = os.path.join(DATA_FOLDER, datasetname)
         files = os.listdir(dataset_folder)
+        print(files)
         if files:
             return True
     return False
