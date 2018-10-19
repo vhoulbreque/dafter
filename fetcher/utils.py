@@ -2,8 +2,9 @@ import os
 import json
 
 
-DATA_FOLDER = os.path.join("data")
-DATASETS_CONFIG_FOLDER = "datasets"
+DATASETS_CONFIG_FOLDER = "datasets-configs"
+DATASETS_FOLDER = os.path.join(os.path.expanduser("~"),
+                                ".datasets-data-fetcher")
 
 
 def normalize_filename(filename):
@@ -47,9 +48,9 @@ def is_dataset_in_db(datasetname):
 
     datasetname = normalize_name(datasetname)
 
-    folders = os.listdir(DATA_FOLDER)
+    folders = os.listdir(DATASETS_FOLDER)
     if datasetname in folders:
-        dataset_folder = os.path.join(DATA_FOLDER, datasetname)
+        dataset_folder = os.path.join(DATASETS_FOLDER, datasetname)
         files = os.listdir(dataset_folder)
         print(files)
         if files:
