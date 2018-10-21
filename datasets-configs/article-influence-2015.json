@@ -3,5 +3,6 @@
   "urls": [
     "https://github.com/FlourishOA/Data/raw/master/estimated-article-influence-scores-2015.csv"
   ],
-  "type": "csv"
+  "type": "csv",
+  "tags": []
 }

@@ -3,5 +3,6 @@
   "urls": [
     "https://data.montgomerycountymd.gov/api/views/xj3h-s2i7/rows.csv?accessType=DOWNLOAD"
   ],
-  "type": "csv"
+  "type": "csv",
+  "tags": ["gov"]
 }

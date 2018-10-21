@@ -57,3 +57,22 @@ def is_dataset_in_db(datasetname):
         if files:
             return True
     return False
+
+
+def get_datasets_with_tag(tag):
+    if tag is None:
+        return []
+
+    dataset_names = []
+
+    config_files = os.listdir(DATASETS_CONFIG_FOLDER)
+    for cf in config_files:
+        cf = os.path.join(DATASETS_CONFIG_FOLDER, cf)
+        with open(cf) as f:
+            config = json.load(f)
+
+        tags = config.get("tags", [])
+        if tag in tags:
+            dataset_names.append(config["name"])
+
+    return dataset_names
