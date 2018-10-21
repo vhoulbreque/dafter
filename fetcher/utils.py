@@ -2,7 +2,8 @@ import os
 import json
 
 
-DATASETS_CONFIG_FOLDER = "datasets-configs"
+DATASETS_CONFIG_FOLDER = os.path.join("/".join(__file__.split("/")[:-1]),
+                                        "..", "datasets-configs")
 DATASETS_FOLDER = os.path.join(os.path.expanduser("~"),
                                 ".datasets-data-fetcher")
 
