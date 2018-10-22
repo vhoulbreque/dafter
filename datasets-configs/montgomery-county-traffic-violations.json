@@ -4,5 +4,6 @@
     "https://data.montgomerycountymd.gov/api/views/4mse-ku6q/rows.csv?accessType=DOWNLOAD"
   ],
   "type": "csv",
-  "tags": ["gov"]
+  "tags": ["gov"],
+  "description": ""
 }

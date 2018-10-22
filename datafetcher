@@ -3,19 +3,20 @@
 import sys
 import readline
 
-from fetcher.fetcher import get_dataset, list_datasets
 from fetcher.utils import get_config_dataset
+from fetcher.fetcher import get_dataset, delete_dataset, list_datasets, \
+    info_dataset
 
 
 args = sys.argv[1:]
 
 if args:
     action = args[0]
-    if action not in ["get", "delete", "list"]:
+    if action not in ["get", "delete", "list", "info"]:
         raise Exception("Wrong action")
     args = args[1:]
 
-    if args and action in ["get", "delete"]:
+    if args and action in ["get", "delete", "info"]:
         datasetname = args[0]
         dataset_config = get_config_dataset(datasetname)
         if dataset_config:
@@ -23,6 +24,8 @@ if args:
                 get_dataset(dataset_config)
             elif action == "delete":
                 delete_dataset(dataset_config)
+            elif action == "info":
+                info_dataset(dataset_config)
             else:
                 print("No action")
         else:
