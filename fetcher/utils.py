@@ -76,3 +76,13 @@ def get_datasets_with_tag(tag):
             dataset_names.append(config["name"])
 
     return dataset_names
+
+
+def update_datafetcher():
+    """Updates datafetcher.
+    Downloads and executes the "update.sh" script.
+    """
+    import subprocess
+
+    bash_command = "cd $HOME && curl https://raw.githubusercontent.com/vinzeebreak/data-fetcher-install/master/update.sh -sSf | bash"
+    output = subprocess.check_output(['bash','-c', bash_command])

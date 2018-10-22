@@ -9,7 +9,7 @@ For now, the supported formats are `.csv` and `.zip`.
 
 To install `datafetcher`, do:
 ```bash
-curl https://raw.githubusercontent.com/vinzeebreak/data-fetcher-install/master/install.sh -sSf | sh
+curl https://raw.githubusercontent.com/vinzeebreak/data-fetcher-install/master/install.sh -sSf | bash
 ```
 
 ## Commands
@@ -27,4 +27,18 @@ datafetcher delete dataset-name
 To list all datasets that have a certain tag:
 ```bash
 datafetcher list tag
+```
+
+## Update
+
+To update `datafetcher`, do:
+```bash
+datafetcher update
+```
+
+## Uninstall
+
+To uninstall `datafetcher`, do:
+```bash
+curl https://raw.githubusercontent.com/vinzeebreak/data-fetcher-install/master/uninstall.sh -sSf | bash
 ```
