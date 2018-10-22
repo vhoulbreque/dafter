@@ -22,7 +22,7 @@ def normalize_name(s):
 
     new_s = ''
     for c in s:
-        if c in '- \t\n':
+        if c in ' \t\n':
             new_s += '_'
         else:
             new_s += c
