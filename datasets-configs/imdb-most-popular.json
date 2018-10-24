@@ -1,0 +1,9 @@
+{
+  "name": "imdb-most-popular",
+  "urls": [
+    "https://www.kaggle.com/PromptCloudHQ/imdb-data/downloads/imdb-data-from-2006-to-2016.zip/1"
+  ],
+  "type": "zip",
+  "tags": ["nlp", "movies"],
+  "description": "A dataset of 1,000 most popular movies on IMDB in the last 10 years."
+}
