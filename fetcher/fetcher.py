@@ -1,7 +1,7 @@
 import os
 import shutil
 
-from .dataset import CSVDataset, ZIPDataset
+from .dataset import CSVDataset, ZIPDataset, GZDataset, TarDataset
 from .utils import is_dataset_in_db, get_datasets_with_tag, normalize_name
 
 
@@ -22,6 +22,12 @@ def get_dataset(dataset_config):
         dataset = CSVDataset(name, urls, save_path=DATASETS_FOLDER)
     elif type == "zip":
         dataset = ZIPDataset(name, urls, save_path=DATASETS_FOLDER)
+    elif type == "gz":
+        dataset = GZDataset(name, urls, save_path=DATASETS_FOLDER)
+    elif type == "tar.gz":
+        dataset = TarDataset(name, urls, save_path=DATASETS_FOLDER)
+    else:
+        return
     dataset.download()
 
 
