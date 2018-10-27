@@ -1,7 +1,7 @@
 import os
 import shutil
 
-from .dataset import CSVDataset, ZIPDataset, GZDataset, TarDataset
+from .dataset import Dataset
 from .utils import is_dataset_in_db, get_datasets_with_tag, normalize_name
 
 
@@ -18,14 +18,9 @@ def get_dataset(dataset_config):
         print("The dataset was already existing in database")
         return
 
-    if type == "csv":
-        dataset = CSVDataset(name, urls, save_path=DATASETS_FOLDER)
-    elif type == "zip":
-        dataset = ZIPDataset(name, urls, save_path=DATASETS_FOLDER)
-    elif type == "gz":
-        dataset = GZDataset(name, urls, save_path=DATASETS_FOLDER)
-    elif type == "tar.gz":
-        dataset = TarDataset(name, urls, save_path=DATASETS_FOLDER)
+    # Only supported extensions
+    if type in ["csv", "zip", "gz", "tar.gz"]:
+        dataset = Dataset(name, urls, extension=type, save_path=DATASETS_FOLDER)
     else:
         return
     dataset.download()
