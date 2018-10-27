@@ -5,10 +5,10 @@ import zipfile
 
 import requests
 
-from .utils import normalize_filename, normalize_name
+from .utils import normalize_name
 
 
-class CSVDataset:
+class Dataset:
 
     def __init__(self, name, urls, save_path=None):
         self.name = normalize_name(name)
@@ -17,6 +17,15 @@ class CSVDataset:
 
         if not os.path.exists(self.save_path):
             os.makedirs(self.save_path)
+
+    def __repr__(self):
+        return self.name
+
+
+class CSVDataset(Dataset):
+
+    def __init__(self, name, urls, save_path=None):
+        Dataset.__init__(self, name, urls, save_path=save_path)
 
     def download(self):
         print("Downloading {}...".format(self.name))
@@ -39,19 +48,11 @@ class CSVDataset:
             with open(f_name, 'w') as f:
                 f.write(resp.text)
 
-    def __repr__(self):
-        return self.name
 
-
-class ZIPDataset:
+class ZIPDataset(Dataset):
 
     def __init__(self, name, urls, save_path=None):
-        self.name = normalize_name(name)
-        self.urls = urls
-        self.save_path = save_path
-
-        if not os.path.exists(self.save_path):
-            os.makedirs(self.save_path)
+        Dataset.__init__(self, name, urls, save_path=save_path)
 
     def download(self):
         print("Downloading {}...".format(self.name))
@@ -70,19 +71,11 @@ class ZIPDataset:
             else:
                 print("Failed downloading {}".format(url))
 
-    def __repr__(self):
-        return self.name
 
-
-class GZDataset:
+class GZDataset(Dataset):
 
     def __init__(self, name, urls, save_path=None):
-        self.name = normalize_name(name)
-        self.urls = urls
-        self.save_path = save_path
-
-        if not os.path.exists(self.save_path):
-            os.makedirs(self.save_path)
+        Dataset.__init__(self, name, urls, save_path=save_path)
 
     def download(self):
         print("Downloading {}...".format(self.name))
@@ -107,19 +100,11 @@ class GZDataset:
             else:
                 print("Failed downloading {}".format(url))
 
-    def __repr__(self):
-        return self.name
 
-
-class TarDataset:
+class TarDataset(Dataset):
 
     def __init__(self, name, urls, save_path=None):
-        self.name = normalize_name(name)
-        self.urls = urls
-        self.save_path = save_path
-
-        if not os.path.exists(self.save_path):
-            os.makedirs(self.save_path)
+        Dataset.__init__(self, name, urls, save_path=save_path)
 
     def download(self):
         print("Downloading {}...".format(self.name))
@@ -143,6 +128,3 @@ class TarDataset:
                         f.write(chunk)
             else:
                 print("Failed downloading {}".format(url))
-
-    def __repr__(self):
-        return self.name
