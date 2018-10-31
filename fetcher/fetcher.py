@@ -2,7 +2,8 @@ import os
 import shutil
 
 from .dataset import Dataset
-from .utils import is_dataset_in_db, get_datasets_with_tag, normalize_name
+from .utils import is_dataset_in_db, get_datasets_with_tag, normalize_name, \
+    is_download_over
 
 
 DATASETS_FOLDER = os.path.join(os.path.expanduser("~"),
@@ -25,7 +26,7 @@ def get_dataset(dataset_config):
     urls = dataset_config["urls"]
     type = dataset_config["type"]
 
-    if is_dataset_in_db(name):
+    if is_dataset_in_db(name) and is_download_over(name):
         print("The dataset was already existing in database")
         return
 

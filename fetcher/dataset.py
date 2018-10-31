@@ -5,7 +5,12 @@ import zipfile
 
 import requests
 
-from .utils import normalize_name
+from .utils import normalize_name, add_chunk_download_config, \
+    create_chunk_count, remove_chunk_count
+
+DOWNLOAD_CONFIG_FILE = os.path.join(os.path.expanduser("~"),
+                                    ".datafetcher",
+                                    "download-config.txt")
 
 
 class Dataset:
@@ -53,11 +58,19 @@ class Dataset:
 
             r = requests.get(url, stream=True)
             if r.status_code == 200:
+                # Useful to resume an interrupted download
+                chunks_to_skip = create_chunk_count(self.name, f_name)
                 with open(f_name, 'wb') as f:
+                    c = 0
                     for chunk in r:
-                        f.write(chunk)
+                        c += 1
+                        if c > chunks_to_skip:
+                            f.write(chunk)
+                            add_chunk_download_config(self.name, f_name)
+                remove_chunk_count(self.name, f_name)
             else:
                 print("Failed downloading {}".format(url))
+
 
     def __repr__(self):
         return self.name
