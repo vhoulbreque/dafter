@@ -9,6 +9,17 @@ DATASETS_FOLDER = os.path.join(os.path.expanduser("~"),
                                 ".datasets-data-fetcher")
 
 def get_dataset(dataset_config):
+    """Downloads the files of the dataset from the urls and saves them on the
+    disk.
+
+    Args:
+        dataset_config (dict): The config of the dataset to download, as stored
+            in the json file of the dataset located in
+            "data-fetcher/datasets-configs"
+
+    Returns:
+        None
+    """
 
     name = dataset_config["name"]
     urls = dataset_config["urls"]
@@ -27,6 +38,15 @@ def get_dataset(dataset_config):
 
 
 def delete_dataset(dataset_config):
+    """Deletes the files of the dataset located on the disk.
+    Args:
+        dataset_config (dict): The config of the dataset to delete, as stored
+            in the json file of the dataset located in
+            "data-fetcher/datasets-configs"
+
+    Returns:
+        None
+    """
 
     name = dataset_config["name"]
 
@@ -44,6 +64,15 @@ def delete_dataset(dataset_config):
 
 
 def list_datasets(tag):
+    """Lists all the datasets names in the config files that have the tag `tag`.
+    Prints all the names of all the datasets that match this criteria.
+
+    Args:
+        tag (str): The tag.
+
+    Returns:
+        None
+    """
     dataset_names = get_datasets_with_tag(tag)
 
     for dn in dataset_names:
@@ -51,6 +80,17 @@ def list_datasets(tag):
 
 
 def info_dataset(dataset_config):
+    """Lists all the relevant information about a dataset. Prints these
+    informations.
+
+    Args:
+        dataset_config (dict): The config of the dataset to describe, as stored
+            in the json file of the dataset located in
+            "data-fetcher/datasets-configs"
+
+    Returns:
+        None
+    """
     name = dataset_config["name"]
     urls = dataset_config["urls"]
     type = dataset_config["type"]

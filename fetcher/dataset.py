@@ -9,8 +9,19 @@ from .utils import normalize_name
 
 
 class Dataset:
+    """Object representing a dataset"""
 
     def __init__(self, name, urls, extension=None, save_path=None):
+        """
+        Args:
+            name (str): The name of the dataset.
+            urls (list of str): The list of all the urls containing a file to
+                download.
+            extension (str, optional): The extension of the files being
+                downloaded.
+            save_path (str, optional): The folder where to save the files of
+                the dataset being downloaded.
+        """
         self.name = normalize_name(name)
         self.urls = urls
         self.save_path = save_path
@@ -23,6 +34,9 @@ class Dataset:
             os.makedirs(self.save_path)
 
     def download(self):
+        """Handles the download of the different files of the dataset located at
+        different urls.
+        """
         print("Downloading {}...".format(self.name))
 
         folder = os.path.join(self.save_path, self.name)
