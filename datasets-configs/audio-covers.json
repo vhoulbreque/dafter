@@ -28,7 +28,7 @@
     "https://archive.org/download/audio-covers/album_covers_v.tar",
     "https://archive.org/download/audio-covers/album_covers_w.tar",
     "https://archive.org/download/audio-covers/album_covers_x.tar",
-    "https://archive.org/download/audio-covers/album_covers_y.tar",
+    "https://archive.org/download/audio-covers/album_covers_y.tar"
   ],
   "type": "tar",
   "tags": ["png", "jpg", "jpeg", "gif", "image"],

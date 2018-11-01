@@ -4,7 +4,7 @@ import shutil
 from fetcher import DATASETS_FOLDER
 from .dataset import Dataset
 from .utils import is_dataset_in_db, get_datasets_with_tag, normalize_name, \
-    is_download_over
+    is_dataset_being_downloaded
 
 
 def get_dataset(dataset_config):
@@ -24,8 +24,8 @@ def get_dataset(dataset_config):
     urls = dataset_config["urls"]
     type = dataset_config["type"]
 
-    if is_dataset_in_db(name) and is_download_over(name):
-        print("The dataset was already existing in database")
+    if is_dataset_in_db(name) and not is_dataset_being_downloaded(name):
+        print("The dataset is already existing in database")
         return
 
     dataset = Dataset(name, urls, extension=type, save_path=DATASETS_FOLDER)
@@ -71,7 +71,16 @@ def list_datasets(tag):
     dataset_names = get_datasets_with_tag(tag)
 
     for dn in dataset_names:
-        print(dn)
+        in_db = is_dataset_in_db(dn)
+        is_being_downloaded = is_dataset_being_downloaded(dn)
+
+        if in_db and not is_being_downloaded:
+            status = "X"
+        elif in_db and is_being_downloaded:
+            status = "/"
+        else:
+            status = " "
+        print("{} {}".format(status, dn))
 
 
 def info_dataset(dataset_config):
@@ -91,6 +100,16 @@ def info_dataset(dataset_config):
     type = dataset_config["type"]
     desc = dataset_config["description"]
 
-    s = "name: {}\nurls: {}\ntype: {}\ndescription: {}\n".format(name, urls,
-                                                                 type, desc)
+    in_db = is_dataset_in_db(name)
+    is_being_downloaded = is_dataset_being_downloaded(name)
+
+    if in_db and not is_being_downloaded:
+        status = "[IN DATABASE]"
+    elif in_db and is_being_downloaded:
+        status = "[BEING DOWNLOADED]"
+    else:
+        status = "[NOT IN DATABASE - NOT BEING DOWNLOADED]"
+
+    s = """status: {}\nname: {}\nurls: {}\n
+type: {}\ndescription: {}\n""".format(status, name, urls, type, desc)
     print(s)

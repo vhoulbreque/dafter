@@ -4,15 +4,14 @@ import json
 from fetcher import *
 
 
-def is_download_over(datasetname):
-    """Tells if the download from a dataset is over, ie. that all the files
-    have been downloaded.
+def is_dataset_being_downloaded(datasetname):
+    """Tells if the dataset is currently being downloaded.
 
     Args:
         datasetname (str): The name of the dataset.
 
     Returns:
-        bool (bool): True if the dataset has been downloaded, False otherwise.
+        bool (bool): True if the dataset is being downloaded, False otherwise.
 
     TODO: be careful, not exact: it can happen that a line for a url has been
     erased but the next one has not yet been written.
@@ -23,8 +22,8 @@ def is_download_over(datasetname):
     for line in lines:
         d_name = line.split('\t')[0]
         if d_name == datasetname:
-            return False
-    return True
+            return True
+    return False
 
 
 def normalize_filename(filename):
@@ -107,7 +106,6 @@ def is_dataset_in_db(datasetname):
     if datasetname in folders:
         dataset_folder = os.path.join(DATASETS_FOLDER, datasetname)
         files = os.listdir(dataset_folder)
-        print(files)
         if files:
             return True
     return False

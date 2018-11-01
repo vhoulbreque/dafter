@@ -42,8 +42,6 @@ if args:
                 delete_dataset(dataset_config)
             elif action == "info":
                 info_dataset(dataset_config)
-            else:
-                print("No action")
         else:
             print("The dataset `{}` does not exist".format(datasetname))
     elif args and action in ["list"]:
