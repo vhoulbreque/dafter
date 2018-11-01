@@ -12,7 +12,18 @@ DOWNLOAD_CONFIG_FILE = os.path.join(os.path.expanduser("~"),
 
 
 def is_download_over(datasetname):
+    """Tells if the download from a dataset is over, ie. that all the files
+    have been downloaded.
 
+    Args:
+        datasetname (str): The name of the dataset.
+
+    Returns:
+        bool (bool): True if the dataset has been downloaded, False otherwise.
+
+    TODO: be careful, not exact: it can happen that a line for a url has been
+    erased but the next one has not yet been written.
+    """
     with open(DOWNLOAD_CONFIG_FILE, "r") as f:
         lines = [line.rstrip('\n') for line in f if line]
 
@@ -21,56 +32,6 @@ def is_download_over(datasetname):
         if d_name == datasetname:
             return False
     return True
-
-
-def create_chunk_count(datasetname, filename):
-
-    with open(DOWNLOAD_CONFIG_FILE, "r") as f:
-        lines = [line.rstrip('\n') for line in f if line]
-
-    for line in lines:
-        l = line.split('\t')
-        d_name = l[0]
-        f_name = l[1]
-
-        if d_name == datasetname and f_name == filename:
-            return int(l[2])
-
-    with open(DOWNLOAD_CONFIG_FILE, "a") as f:
-        f.write("{}\t{}\t{}\n".format(datasetname, filename, 0))
-
-    return 0
-
-
-def remove_chunk_count(datasetname, filename):
-    with open(DOWNLOAD_CONFIG_FILE, "r") as f:
-        lines = [line.rstrip('\n') for line in f if line]
-
-    with open(DOWNLOAD_CONFIG_FILE, "w") as f:
-        for line in lines:
-            l = line.split('\t')
-            d_name = l[0]
-            f_name = l[1]
-            if d_name == datasetname and f_name == filename:
-                continue
-            f.write("{}\n".format(line))
-
-def add_chunk_download_config(datasetname, filename):
-    with open(DOWNLOAD_CONFIG_FILE, "r") as f:
-        lines = [line.rstrip('\n') for line in f if line]
-
-    with open(DOWNLOAD_CONFIG_FILE, "w") as f:
-        for line in lines:
-            l = line.split('\t')
-            d_name = l[0]
-            f_name = l[1]
-            c = int(l[2])
-            if d_name == datasetname and f_name == filename:
-                # increase the counter only for the right dataset
-                # and the right file
-                c += 1
-            new_line = "{}\t{}\t{}\n".format(d_name, f_name, c)
-            f.write(new_line)
 
 
 def normalize_filename(filename):
