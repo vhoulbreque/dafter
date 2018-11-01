@@ -28,11 +28,7 @@ def get_dataset(dataset_config):
         print("The dataset was already existing in database")
         return
 
-    # Only supported extensions
-    if type in ["csv", "zip", "gz", "tar.gz"]:
-        dataset = Dataset(name, urls, extension=type, save_path=DATASETS_FOLDER)
-    else:
-        return
+    dataset = Dataset(name, urls, extension=type, save_path=DATASETS_FOLDER)
     dataset.download()
 
 

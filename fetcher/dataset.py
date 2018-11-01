@@ -35,6 +35,16 @@ class Dataset:
         if not os.path.exists(self.save_path):
             os.makedirs(self.save_path)
 
+    def _handle_post_download(self, filename):
+        """Handles the post download processing. Can unzip, uncompress, unpickle
+        the files depending on their extensions.
+
+        Args:
+            filename (str): the filename of the particular file that needs to be
+                processed.
+        """
+        pass
+
     def download(self):
         """Handles the download of the different files of the dataset located at
         different urls.
@@ -67,6 +77,7 @@ class Dataset:
                             f.write(chunk)
                             dh.add_chunk_count(n_chunks=1)
                 dh.remove_chunk_count()
+                self._handle_post_download(f_name)
             else:
                 print("Failed downloading {}".format(url))
 
