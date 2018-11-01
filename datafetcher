@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import sys
-import readline
 
 from fetcher.utils import get_config_dataset, update_datafetcher
 from fetcher.fetcher import get_dataset, delete_dataset, list_datasets, \
