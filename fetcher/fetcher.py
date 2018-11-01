@@ -1,13 +1,11 @@
 import os
 import shutil
 
+from fetcher import DATASETS_FOLDER
 from .dataset import Dataset
 from .utils import is_dataset_in_db, get_datasets_with_tag, normalize_name, \
     is_download_over
 
-
-DATASETS_FOLDER = os.path.join(os.path.expanduser("~"),
-                                ".datasets-data-fetcher")
 
 def get_dataset(dataset_config):
     """Downloads the files of the dataset from the urls and saves them on the

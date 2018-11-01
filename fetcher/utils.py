@@ -1,14 +1,7 @@
 import os
 import json
 
-
-DATASETS_CONFIG_FOLDER = os.path.join("/".join(__file__.split("/")[:-1]),
-                                        "..", "datasets-configs")
-DATASETS_FOLDER = os.path.join(os.path.expanduser("~"),
-                                ".datasets-data-fetcher")
-DOWNLOAD_CONFIG_FILE = os.path.join(os.path.expanduser("~"),
-                                    ".datafetcher",
-                                    "download-config.txt")
+from fetcher import *
 
 
 def is_download_over(datasetname):

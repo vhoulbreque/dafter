@@ -1,9 +1,6 @@
 import os
 
-
-DOWNLOAD_CONFIG_FILE = os.path.join(os.path.expanduser("~"),
-                                    ".datafetcher",
-                                    "download-config.txt")
+from fetcher import DOWNLOAD_CONFIG_FILE
 
 
 class DownloadHelper:

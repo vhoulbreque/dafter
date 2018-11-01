@@ -5,13 +5,9 @@ import zipfile
 
 import requests
 
+from fetcher import DOWNLOAD_CONFIG_FILE
 from .utils import normalize_name
 from .downloadhelper import DownloadHelper
-
-
-DOWNLOAD_CONFIG_FILE = os.path.join(os.path.expanduser("~"),
-                                    ".datafetcher",
-                                    "download-config.txt")
 
 
 class Dataset:
