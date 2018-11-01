@@ -8,12 +8,26 @@ from fetcher.fetcher import get_dataset, delete_dataset, list_datasets, \
     info_dataset
 
 
+HELP_MESSAGE = """usage: datafetcher [get dataset-name] [delete dataset-name] [info dataset-name] [update] [list tag]
+
+Fetches all kind of datasets, whatever the format. Without hussle, without hurdle.
+
+Positional arguments:
+  get dataset-name        Download and save the dataset files
+  delete dataset-name     Deletes the dataset files from the disk
+  info dataset-name       Describes the dataset
+  update                  Updates datafetcher
+  list tag                List all the datasets that have a certain tag
+"""
+
 args = sys.argv[1:]
 
 if args:
     action = args[0]
     if action not in ["get", "delete", "list", "info", "update"]:
-        raise Exception("Wrong action")
+        print("This command `datafetcher {}` does not exist\n".format(action))
+        print(HELP_MESSAGE)
+
     args = args[1:]
 
     if action in ["update"]:
@@ -31,11 +45,18 @@ if args:
             else:
                 print("No action")
         else:
-            raise Exception("The dataset does not exist")
+            print("The dataset `{}` does not exist".format(datasetname))
     elif args and action in ["list"]:
         tag = args[0]
         list_datasets(tag)
+    elif not args:
+        if action in ["list"]:
+            print("A tag is required\n")
+            print(HELP_MESSAGE)
+        elif action in ["get", "delete", "info"]:
+            print("A dataset name is required\n")
+            print(HELP_MESSAGE)
     else:
-        raise Exception("No dataset/No tag")
+        print(HELP_MESSAGE)
 else:
-    raise Exception("No args")
+    print(HELP_MESSAGE)
