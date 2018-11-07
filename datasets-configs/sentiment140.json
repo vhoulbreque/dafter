@@ -5,7 +5,7 @@
   ],
   "size": "78 MB",
   "type": "zip",
-  "tags": ["nlp", "sentiment"],
+  "tags": ["nlp", "sentiment", "stanford"],
   "description": "",
   "source": "http://help.sentiment140.com/for-students/"
 }
