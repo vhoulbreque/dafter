@@ -1,0 +1,11 @@
+{
+  "name": "france-postal-code",
+  "urls": [
+    "https://datanova.legroupe.laposte.fr/explore/dataset/laposte_commnouv/download/?format=csv&timezone=Europe/Berlin&use_labels_for_header=true"
+  ],
+  "size": "224 KB",
+  "type": "gz",
+  "tags": ["france", "zipcode", "gov"],
+  "description": "Ce jeu de données recense les nouvelles communes créées depuis la promulgation de la loi n° 2015-292 du16 mars 2015 relative à l'amélioration du régime de la commune nouvelle et fournit les nouvelles données d’adresse correspondantes. Ces données sont fournies par le Service National de l’Adresse (SNA) du Groupe La Poste.",
+  "source": "https://www.data.gouv.fr/fr/datasets/base-officielle-des-codes-postaux/#_"
+}
