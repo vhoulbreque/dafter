@@ -3,7 +3,6 @@
 ## You just found the ultimate datafetcher
 
 Fetches all kind of datasets, whatever the format.
-For now, the supported formats are `.csv` and `.zip`.
 
 ## Install
 
@@ -14,19 +13,19 @@ curl https://raw.githubusercontent.com/vinzeebreak/data-fetcher-install/master/i
 
 ## Commands
 
-To download a dataset:
+To download the MNIST dataset:
 ```bash
-datafetcher get dataset-name
+datafetcher get mnist
 ```
 
-To delete a dataset from the database:
+To delete MNIST from the database:
 ```bash
-datafetcher delete dataset-name
+datafetcher delete mnist
 ```
 
-To list all datasets that have a certain tag:
+To list all datasets that have a certain tag, say `image`:
 ```bash
-datafetcher list tag
+datafetcher list image
 ```
 
 ## Update
