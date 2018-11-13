@@ -19,7 +19,6 @@ def get_dataset(dataset_config):
     Returns:
         None
     """
-
     name = dataset_config["name"]
     urls = dataset_config["urls"]
     type = dataset_config["type"]
@@ -42,7 +41,6 @@ def delete_dataset(dataset_config):
     Returns:
         None
     """
-
     name = dataset_config["name"]
 
     if not is_dataset_in_db(name):

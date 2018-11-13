@@ -12,11 +12,11 @@ HELP_MESSAGE = """usage: datafetcher [get dataset-name] [delete dataset-name] [i
 Fetches all kind of datasets, whatever the format. Without hussle, without hurdle.
 
 Positional arguments:
-  get dataset-name        Download and save the dataset files
+  get dataset-name        Downloads and saves the dataset files
   delete dataset-name     Deletes the dataset files from the disk
   info dataset-name       Describes the dataset
   update                  Updates datafetcher
-  list tag                List all the datasets that have a certain tag
+  list tag                Lists all the datasets that have a certain tag
 """
 
 args = sys.argv[1:]
