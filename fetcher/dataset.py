@@ -35,7 +35,7 @@ class Dataset:
         if not os.path.exists(self.save_path):
             os.makedirs(self.save_path)
 
-    def _handle_post_download(self, filename):
+    def _handle_post_download(self, files_paths):
         """Handles the post download processing. Can unzip, uncompress, unpickle
         the files depending on their extensions.
 
@@ -43,7 +43,22 @@ class Dataset:
             filename (str): the filename of the particular file that needs to be
                 processed.
         """
-        pass
+        from importlib import import_module
+
+        try:
+            print("Processing the files that have fetched..")
+            module = import_module("fetcher.scripts.{}".format(self.name))
+            handle_post_download = getattr(module, "handle_post_download")
+        except ImportError as e:
+            print("ImportError : ", e)
+            print("Cannot process the files downloaded...")
+            print("Stopping..")
+            return
+
+        try:
+            handle_post_download(files_paths)
+        except Exception as e:
+            print("Exception in _handle_post_download: ", e)
 
     def download(self):
         """Handles the download of the different files of the dataset located at
@@ -55,13 +70,16 @@ class Dataset:
         if not os.path.exists(folder):
             os.makedirs(folder)
 
+        files_paths = []
         for i, url in enumerate(self.urls):
             print("{} / {} - {}".format(i+1, len(self.urls), url))
             if len(self.urls) > 1:
                 f_name = "{}_{}.{}".format(self.name, i, self.extension)
             else:
                 f_name = "{}.{}".format(self.name, self.extension)
+
             f_name = os.path.join(folder, f_name)
+            files_paths.append(f_name)
 
             r = requests.get(url, stream=True)
             if r.status_code == 200:
@@ -77,9 +95,9 @@ class Dataset:
                             f.write(chunk)
                             dh.add_chunk_count(n_chunks=1)
                 dh.remove_chunk_count()
-                self._handle_post_download(f_name)
             else:
                 print("Failed downloading {}".format(url))
+        self._handle_post_download(files_paths)
 
     def __repr__(self):
         return self.name
