@@ -145,3 +145,11 @@ def update_datafetcher():
 
     bash_command = "cd $HOME && curl https://raw.githubusercontent.com/vinzeebreak/data-fetcher-install/master/update.sh -sSf | bash"
     output = subprocess.check_output(['bash','-c', bash_command])
+
+
+def uninstall_datafetcher():
+    """Uninstall datafetcher. Downloads and executes the "uninstall.sh" script."""
+    import subprocess
+
+    bash_command = "cd $HOME && curl https://raw.githubusercontent.com/vinzeebreak/data-fetcher-install/master/uninstall.sh -sSf | bash"
+    output = subprocess.check_output(['bash','-c', bash_command])

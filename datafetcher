@@ -2,7 +2,8 @@
 
 import sys
 
-from fetcher.utils import get_config_dataset, update_datafetcher
+from fetcher.utils import get_config_dataset, update_datafetcher, \
+    uninstall_datafetcher
 from fetcher.fetcher import get_dataset, delete_dataset, list_datasets, \
     info_dataset
 
@@ -16,6 +17,7 @@ Positional arguments:
   delete dataset-name     Deletes the dataset files from the disk
   info dataset-name       Describes the dataset
   update                  Updates datafetcher
+  uninstall               Uninstalls datafetcher
   list tag                Lists all the datasets that have a certain tag
 """
 
@@ -23,7 +25,7 @@ args = sys.argv[1:]
 
 if args:
     action = args[0]
-    if action not in ["get", "delete", "list", "info", "update"]:
+    if action not in ["get", "delete", "list", "info", "update", "uninstall"]:
         print("This command `datafetcher {}` does not exist\n".format(action))
         print(HELP_MESSAGE)
 
@@ -31,6 +33,8 @@ if args:
 
     if action in ["update"]:
         update_datafetcher()
+    elif action in ["uninstall"]:
+        uninstall_datafetcher()
     elif args and action in ["get", "delete", "info"]:
         datasetname = args[0]
         dataset_config = get_config_dataset(datasetname)
