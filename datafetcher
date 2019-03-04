@@ -8,9 +8,9 @@ from fetcher.fetcher import get_dataset, delete_dataset, list_datasets, \
     info_dataset
 
 
-HELP_MESSAGE = """usage: datafetcher [get dataset-name] [delete dataset-name] [info dataset-name] [update] [list tag]
+HELP_MESSAGE = """usage: datafetcher [get dataset-name] [delete dataset-name] [info dataset-name] [update] [uninstall] [list tag]
 
-Fetches all kind of datasets, whatever the format. Without hussle, without hurdle.
+Fetches all kind of datasets, whatever the format. Without pain.
 
 Positional arguments:
   get dataset-name        Downloads and saves the dataset files
@@ -25,13 +25,15 @@ args = sys.argv[1:]
 
 if args:
     action = args[0]
-    if action not in ["get", "delete", "list", "info", "update", "uninstall"]:
+    if action not in ["get", "delete", "list", "info", "update", "uninstall", "help"]:
         print("This command `datafetcher {}` does not exist\n".format(action))
         print(HELP_MESSAGE)
 
     args = args[1:]
 
-    if action in ["update"]:
+    if action in ["help"]:
+        print(HELP_MESSAGE)
+    elif action in ["update"]:
         update_datafetcher()
     elif action in ["uninstall"]:
         uninstall_datafetcher()
