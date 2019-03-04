@@ -4,11 +4,17 @@
 
 Fetches all kind of datasets, whatever the format.
 
+
 ## Install
 
-To install `datafetcher`, do:
+**Last stable version**:
 ```bash
 curl https://raw.githubusercontent.com/vinzeebreak/data-fetcher-install/master/install.sh -sSf | bash
+```
+
+**Up-to-date version**:
+```bash
+curl https://raw.githubusercontent.com/vinzeebreak/data-fetcher-install/master/install.sh -sSf | bash -s -- --up-to-date
 ```
 
 ## Commands
