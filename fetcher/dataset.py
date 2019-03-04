@@ -99,8 +99,11 @@ class Dataset:
                 print("Failed downloading {}".format(url))
 
         print("Finished downloading the files")
-        
+
         self._handle_post_download(files_paths)
+
+        dataset_path = "/".join(files_paths[0].split("/")[:-1])
+        print("The dataset has been stored in {}".format(dataset_path))
 
     def __repr__(self):
         return self.name
