@@ -44,6 +44,13 @@ datafetcher update
 ## Uninstall
 
 To uninstall `datafetcher`, do:
+
+```bash
+datafetcher uninstall
+```
+
+or
+
 ```bash
 curl https://raw.githubusercontent.com/vinzeebreak/data-fetcher-install/master/uninstall.sh -sSf | bash
 ```
