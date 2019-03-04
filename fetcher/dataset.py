@@ -45,15 +45,15 @@ class Dataset:
         """
         from importlib import import_module
 
+        def default_post_download(files_paths):
+            pass
+
         try:
-            print("Processing the files that have fetched..")
+            print("Processing the files that have been fetched..")
             module = import_module("fetcher.scripts.{}".format(self.name))
             handle_post_download = getattr(module, "handle_post_download")
         except ImportError as e:
-            print("ImportError : ", e)
-            print("Cannot process the files downloaded...")
-            print("Stopping..")
-            return
+            handle_post_download = default_post_download
 
         try:
             handle_post_download(files_paths)
@@ -97,6 +97,9 @@ class Dataset:
                 dh.remove_chunk_count()
             else:
                 print("Failed downloading {}".format(url))
+
+        print("Finished downloading the files")
+        
         self._handle_post_download(files_paths)
 
     def __repr__(self):

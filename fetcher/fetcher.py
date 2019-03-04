@@ -24,7 +24,7 @@ def get_dataset(dataset_config):
     type = dataset_config["type"]
 
     if is_dataset_in_db(name) and not is_dataset_being_downloaded(name):
-        print("The dataset is already existing in database")
+        print("The dataset has already been fetched")
         return
 
     dataset = Dataset(name, urls, extension=type, save_path=DATASETS_FOLDER)
@@ -52,6 +52,7 @@ def delete_dataset(dataset_config):
     try:
         print("Deleting {}...".format(name))
         shutil.rmtree(name)
+        print("The dataset has been deleted!")
     except Exception as e:
         print("An exception occurred while deleting {}: {}".format(name, e))
 
