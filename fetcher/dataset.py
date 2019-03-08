@@ -1,13 +1,7 @@
 import os
-import io
-import gzip
-import zipfile
-
 import requests
 
-from fetcher import DOWNLOAD_CONFIG_FILE
-from .utils import normalize_name
-from .downloadhelper import DownloadHelper
+from .utils import normalize_name, normalize_filename
 
 
 class Dataset:
@@ -32,78 +26,64 @@ class Dataset:
             extension = normalize_filename(self.urls[0]).split('.')[-1]
         self.extension = extension
 
-        if not os.path.exists(self.save_path):
-            os.makedirs(self.save_path)
-
-    def _handle_post_download(self, files_paths):
-        """Handles the post download processing. Can unzip, uncompress, unpickle
-        the files depending on their extensions.
-
-        Args:
-            filename (str): the filename of the particular file that needs to be
-                processed.
-        """
-        from importlib import import_module
-
-        def default_post_download(files_paths):
-            pass
-
-        try:
-            print("Processing the files that have been fetched..")
-            module = import_module("fetcher.scripts.{}".format(self.name))
-            handle_post_download = getattr(module, "handle_post_download")
-        except ImportError as e:
-            handle_post_download = default_post_download
-
-        try:
-            handle_post_download(files_paths)
-        except Exception as e:
-            print("Exception in _handle_post_download: ", e)
+        self.save_folder = os.path.join(self.save_path, self.name)
+        if not os.path.exists(self.save_folder):
+            os.makedirs(self.save_folder)
 
     def download(self):
         """Handles the download of the different files of the dataset located at
         different urls.
         """
+
+        def download_file(url, local_filename, resume_byte_pose=None):
+            """Download a file"""
+            if resume_byte_pose:
+                resume_header = {'Range': 'bytes=%d-' % resume_byte_pos}
+                write_mode = "ab"
+            else:
+                resume_header = {'Range': 'bytes=%d-' % 0}
+                write_mode = "wb"
+
+            # Download from the beginning
+            with requests.get(url, stream=True, headers=resume_header) as r:
+                with open(local_filename, write_mode) as f:
+                    for chunk in r.iter_content(chunk_size=8192):
+                        if chunk:  # filter out keep-alive new chunks
+                            f.write(chunk)
+                            f.flush()
+
         print("Downloading {}...".format(self.name))
 
-        folder = os.path.join(self.save_path, self.name)
-        if not os.path.exists(folder):
-            os.makedirs(folder)
-
-        files_paths = []
+        stored_f_name = [os.path.join(self.save_folder, f_name)
+                                for f_name in os.listdir(self.save_folder)]
         for i, url in enumerate(self.urls):
             print("{} / {} - {}".format(i+1, len(self.urls), url))
-            if len(self.urls) > 1:
-                f_name = "{}_{}.{}".format(self.name, i, self.extension)
-            else:
-                f_name = "{}.{}".format(self.name, self.extension)
 
-            f_name = os.path.join(folder, f_name)
-            files_paths.append(f_name)
+            f_name = "{}_{}.{}".format(self.name, i, self.extension) if len(self.urls) > 1 else "{}.{}".format(self.name, self.extension)
+            f_name = os.path.join(self.save_folder, f_name)
 
-            r = requests.get(url, stream=True)
-            if r.status_code == 200:
-                # Useful to resume an interrupted download
-                dh = DownloadHelper(self.name, f_name)
-                dh.create_chunk_count()
-                chunks_to_skip = dh.get_chunk_count()
-                with open(f_name, 'wb') as f:
-                    c = 0
-                    for chunk in r:
-                        c += 1
-                        if c > chunks_to_skip:
-                            f.write(chunk)
-                            dh.add_chunk_count(n_chunks=1)
-                dh.remove_chunk_count()
+            # Test if already downloaded
+            if f_name in stored_f_name:
+                print("{} was already downloaded".format(f_name))
+                continue
+
+            # Test if incomplete download
+            incomplete_f_name = "{}.incomplete".format(f_name)
+            if incomplete_f_name in stored_f_name:
+                resume_byte_pos = os.path.getsize(incomplete_f_name)  # 56282L
+                resume_byte_pos = str(resume_byte_pos)[:-1]
+                resume_byte_pos = int(resume_byte_pos)
             else:
+                resume_byte_pos = None
+
+            try:
+                download_file(url, incomplete_f_name, resume_byte_pos)
+                # From "datasetname.incomplete" to "datasetname"
+                os.rename(incomplete_f_name, f_name)
+                print("The dataset has been stored in {}".format(self.save_folder))
+            except Exception as e:
                 print("Failed downloading {}".format(url))
-
-        print("Finished downloading the files")
-
-        self._handle_post_download(files_paths)
-
-        dataset_path = "/".join(files_paths[0].split("/")[:-1])
-        print("The dataset has been stored in {}".format(dataset_path))
+                print("Exception : ", e)
 
     def __repr__(self):
         return self.name

@@ -7,22 +7,25 @@ from fetcher import *
 def is_dataset_being_downloaded(datasetname):
     """Tells if the dataset is currently being downloaded.
 
+    TODO: also check if the number of downloaded files is the same at what is
+    expected in the config.
+
     Args:
         datasetname (str): The name of the dataset.
 
     Returns:
         bool (bool): True if the dataset is being downloaded, False otherwise.
-
-    TODO: be careful, not exact: it can happen that a line for a url has been
-    erased but the next one has not yet been written.
     """
-    with open(DOWNLOAD_CONFIG_FILE, "r") as f:
-        lines = [line.rstrip('\n') for line in f if line]
 
-    for line in lines:
-        d_name = line.split('\t')[0]
-        if d_name == datasetname:
-            return True
+    datasetname = normalize_filename(datasetname)
+
+    folders = os.listdir(DATASETS_FOLDER)
+    for folder in folders:
+        if folder == datasetname:
+            files = os.listdir(os.path.join(DATASETS_FOLDER, folder))
+            for filename in files:
+                if "incomplete" in filename:
+                    return True
     return False
 
 
