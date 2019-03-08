@@ -4,6 +4,10 @@
 
 Fetches all kind of datasets, whatever the format.
 
+ - [Install](#install)
+ - [Commands](#commands)
+ - [How to contribute](#how-to-contribute)
+
 
 ## Install
 
@@ -55,9 +59,9 @@ or
 curl https://raw.githubusercontent.com/vinzeebreak/data-fetcher-install/master/uninstall.sh -sSf | bash
 ```
 
-# How to contribute?
+## How to contribute?
 
-## Add a new dataset
+### Add a new dataset
 
 To add a new dataset, just add a `json` file called `name-of-the-dataset.json` in the `datasets-configs` folder.
 
