@@ -82,7 +82,7 @@ class Dataset:
                 os.rename(incomplete_f_name, f_name)
                 print("The dataset has been stored in {}".format(self.save_folder))
 
-                url_loader = "https://vinzeebreak.github.io/data-loader/docs/{}/".format(self.name)
+                url_loader = "https://vinzeebreak.github.io/dafter-loader/docs/{}/".format(self.name)
                 print("To load the dataset inside a script or a notebook, see: {}".format(url_loader))
             except Exception as e:
                 print("Failed downloading {}".format(url))
