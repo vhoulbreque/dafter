@@ -1,4 +1,4 @@
-# datafetcher
+# dafter
 
 ## You just found the ultimate datafetcher
 
@@ -13,50 +13,50 @@ Fetches all kind of datasets, whatever the format.
 
 **Last stable version**:
 ```bash
-curl https://raw.githubusercontent.com/vinzeebreak/data-fetcher-install/master/install.sh -sSf | bash
+curl https://raw.githubusercontent.com/vinzeebreak/dafter-install/master/install.sh -sSf | bash
 ```
 
 **Up-to-date version**:
 ```bash
-curl https://raw.githubusercontent.com/vinzeebreak/data-fetcher-install/master/install.sh -sSf | bash -s -- --up-to-date
+curl https://raw.githubusercontent.com/vinzeebreak/dafter-install/master/install.sh -sSf | bash -s -- --up-to-date
 ```
 
 ## Commands
 
 To download the MNIST dataset:
 ```bash
-datafetcher get mnist
+dafter get mnist
 ```
 
 To delete MNIST from the database:
 ```bash
-datafetcher delete mnist
+dafter delete mnist
 ```
 
 To list all datasets that have a certain tag, say `image`:
 ```bash
-datafetcher list image
+dafter list image
 ```
 
 ## Update
 
-To update `datafetcher`, do:
+To update `dafter`, do:
 ```bash
-datafetcher update
+dafter update
 ```
 
 ## Uninstall
 
-To uninstall `datafetcher`, do:
+To uninstall `dafter`, do:
 
 ```bash
-datafetcher uninstall
+dafter uninstall
 ```
 
 or
 
 ```bash
-curl https://raw.githubusercontent.com/vinzeebreak/data-fetcher-install/master/uninstall.sh -sSf | bash
+curl https://raw.githubusercontent.com/vinzeebreak/dafter-install/master/uninstall.sh -sSf | bash
 ```
 
 ## How to contribute?

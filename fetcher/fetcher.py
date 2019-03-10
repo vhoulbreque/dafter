@@ -14,7 +14,7 @@ def get_dataset(dataset_config):
     Args:
         dataset_config (dict): The config of the dataset to download, as stored
             in the json file of the dataset located in
-            "data-fetcher/datasets-configs"
+            "dafter/datasets-configs"
 
     Returns:
         None
@@ -36,7 +36,7 @@ def delete_dataset(dataset_config):
     Args:
         dataset_config (dict): The config of the dataset to delete, as stored
             in the json file of the dataset located in
-            "data-fetcher/datasets-configs"
+            "dafter/datasets-configs"
 
     Returns:
         None
@@ -89,7 +89,7 @@ def info_dataset(dataset_config):
     Args:
         dataset_config (dict): The config of the dataset to describe, as stored
             in the json file of the dataset located in
-            "data-fetcher/datasets-configs"
+            "dafter/datasets-configs"
 
     Returns:
         None

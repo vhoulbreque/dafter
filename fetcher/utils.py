@@ -70,7 +70,7 @@ def normalize_name(s):
 
 def get_config_dataset(datasetname):
     """Gets the config of a dataset from its config file located in
-    "data-fetcher/datasets-configs"
+    "dafter/datasets-configs"
 
     Args:
         datasetname (str): The name of the dataset.
@@ -142,17 +142,17 @@ def get_datasets_with_tag(tag):
     return dataset_names
 
 
-def update_datafetcher():
-    """Updates datafetcher. Downloads and executes the "update.sh" script."""
+def update_dafter():
+    """Updates dafter. Downloads and executes the "update.sh" script."""
     import subprocess
 
-    bash_command = "cd $HOME && curl https://raw.githubusercontent.com/vinzeebreak/data-fetcher-install/master/update.sh -sSf | bash"
+    bash_command = "cd $HOME && curl https://raw.githubusercontent.com/vinzeebreak/dafter-install/master/update.sh -sSf | bash"
     output = subprocess.check_output(['bash','-c', bash_command])
 
 
-def uninstall_datafetcher():
-    """Uninstall datafetcher. Downloads and executes the "uninstall.sh" script."""
+def uninstall_dafter():
+    """Uninstall dafter. Downloads and executes the "uninstall.sh" script."""
     import subprocess
 
-    bash_command = "cd $HOME && curl https://raw.githubusercontent.com/vinzeebreak/data-fetcher-install/master/uninstall.sh -sSf | bash"
+    bash_command = "cd $HOME && curl https://raw.githubusercontent.com/vinzeebreak/dafter-install/master/uninstall.sh -sSf | bash"
     output = subprocess.check_output(['bash','-c', bash_command])
