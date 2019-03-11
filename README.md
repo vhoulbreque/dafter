@@ -33,9 +33,14 @@ To delete MNIST from the database:
 dafter delete mnist
 ```
 
-To list all datasets that have a certain tag, say `image`:
+To search all available datasets that have a certain tag, say `image` and `deep-learning`:
 ```bash
-dafter list image
+dafter search image deep-learning
+```
+
+To list all downloaded datasets:
+```bash
+dafter list
 ```
 
 ## Update
@@ -51,11 +56,7 @@ To uninstall `dafter`, do:
 
 ```bash
 dafter uninstall
-```
-
-or
-
-```bash
+# or
 curl https://raw.githubusercontent.com/vinzeebreak/dafter-install/master/uninstall.sh -sSf | bash
 ```
 

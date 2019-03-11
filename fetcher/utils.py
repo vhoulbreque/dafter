@@ -114,34 +114,6 @@ def is_dataset_in_db(datasetname):
     return False
 
 
-def get_datasets_with_tag(tag):
-    """Retrieves all the datasets in the config database that have the tag.
-
-    Args:
-        tag (str): The tag.
-
-    Returns:
-        dataset_names (list of str): The list of all the dataset names that
-            match the criteria.
-    """
-    if tag is None:
-        return []
-
-    dataset_names = []
-
-    config_files = os.listdir(DATASETS_CONFIG_FOLDER)
-    for cf in config_files:
-        cf = os.path.join(DATASETS_CONFIG_FOLDER, cf)
-        with open(cf) as f:
-            config = json.load(f)
-
-        tags = config.get("tags", [])
-        if tag in tags:
-            dataset_names.append(config["name"])
-
-    return dataset_names
-
-
 def update_dafter():
     """Updates dafter. Downloads and executes the "update.sh" script."""
     import subprocess

@@ -5,10 +5,10 @@ import sys
 from fetcher.utils import get_config_dataset, update_dafter, \
     uninstall_dafter
 from fetcher.fetcher import get_dataset, delete_dataset, list_datasets, \
-    info_dataset
+    info_dataset, search_datasets
 
 
-HELP_MESSAGE = """usage: dafter [get dataset-name] [delete dataset-name] [info dataset-name] [update] [uninstall] [list tag]
+HELP_MESSAGE = """usage: dafter [get dataset-name] [delete dataset-name] [info dataset-name] [update] [uninstall] [list] [search tag0 .. tagN]
 
 Fetches all kind of datasets, whatever the format. Without pain.
 
@@ -18,14 +18,15 @@ Positional arguments:
   info dataset-name       Describes the dataset
   update                  Updates dafter
   uninstall               Uninstalls dafter
-  list tag                Lists all the datasets that have a certain tag
+  list                    Lists all the datasets that are in database
+  search tag0 .. tagN     Lists all the datasets available with these tags
 """
 
 args = sys.argv[1:]
 
 if args:
     action = args[0]
-    if action not in ["get", "delete", "list", "info", "update", "uninstall", "help"]:
+    if action not in ["get", "delete", "list", "search", "info", "update", "uninstall", "help"]:
         print("This command `dafter {}` does not exist\n".format(action))
         print(HELP_MESSAGE)
 
@@ -49,9 +50,12 @@ if args:
                 info_dataset(dataset_config)
         else:
             print("The dataset `{}` does not exist".format(datasetname))
-    elif args and action in ["list"]:
-        tag = args[0]
-        list_datasets(tag)
+    elif args and action in ["search"]:
+        tags = ",".join(args).split(",")
+        tags = [t.strip() for t in tags]
+        search_datasets(tags)
+    elif action in ["list"]:
+        list_datasets()
     elif not args:
         if action in ["list"]:
             print("A tag is required\n")
