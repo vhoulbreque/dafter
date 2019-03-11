@@ -2,7 +2,9 @@
   "name": "montgomery-county-traffic-violations",
   "urls": [
     {
-      "url": "https://data.montgomerycountymd.gov/api/views/4mse-ku6q/rows.csv?accessType=DOWNLOAD"
+      "url": "https://data.montgomerycountymd.gov/api/views/4mse-ku6q/rows.csv?accessType=DOWNLOAD",
+      "bytes": 536632722
+
     }
   ],
   "type": "csv",

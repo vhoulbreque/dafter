@@ -2,7 +2,8 @@
   "name": "article-influence-2015",
   "urls": [
     {
-      "url": "https://github.com/FlourishOA/Data/raw/master/estimated-article-influence-scores-2015.csv"
+      "url": "https://github.com/FlourishOA/Data/raw/master/estimated-article-influence-scores-2015.csv",
+      "bytes": 316884
     }
   ],
   "type": "csv",

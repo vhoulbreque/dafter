@@ -2,7 +2,8 @@
   "name": "twenty-newsgroups",
   "urls": [
     {
-      "url": "https://archive.ics.uci.edu/ml/machine-learning-databases/20newsgroups-mld/20_newsgroups.tar.gz"
+      "url": "https://archive.ics.uci.edu/ml/machine-learning-databases/20newsgroups-mld/20_newsgroups.tar.gz",
+      "bytes": 17332201
     }
   ],
   "type": "tar.gz",

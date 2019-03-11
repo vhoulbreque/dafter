@@ -2,25 +2,32 @@
   "name": "imdb-datasets",
   "urls": [
     {
-      "url":    "https://datasets.imdbws.com/name.basics.tsv.gz"
+      "url": "https://datasets.imdbws.com/name.basics.tsv.gz",
+      "bytes": 180275277
     },
     {
-      "url":    "https://datasets.imdbws.com/title.akas.tsv.gz"
+      "url": "https://datasets.imdbws.com/title.akas.tsv.gz",
+      "bytes": 55379355
     },
     {
-      "url":    "https://datasets.imdbws.com/title.basics.tsv.gz"
+      "url": "https://datasets.imdbws.com/title.basics.tsv.gz",
+      "bytes": 102251632
     },
     {
-      "url":    "https://datasets.imdbws.com/title.crew.tsv.gz"
+      "url": "https://datasets.imdbws.com/title.crew.tsv.gz",
+      "bytes": 41411242
     },
     {
-      "url":    "https://datasets.imdbws.com/title.episode.tsv.gz"
+      "url": "https://datasets.imdbws.com/title.episode.tsv.gz",
+      "bytes": 21475433
     },
     {
-      "url":    "https://datasets.imdbws.com/title.principals.tsv.gz"
+      "url": "https://datasets.imdbws.com/title.principals.tsv.gz",
+      "bytes": 278090793
     },
     {
-      "url":    "https://datasets.imdbws.com/title.ratings.tsv.gz"
+      "url": "https://datasets.imdbws.com/title.ratings.tsv.gz",
+      "bytes": 4519029
     }
   ],
   "type": "gz",

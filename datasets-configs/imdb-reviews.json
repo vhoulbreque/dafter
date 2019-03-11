@@ -2,7 +2,8 @@
   "name": "imdb-reviews",
   "urls": [
     {
-      "url": "https://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz"
+      "url": "https://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz",
+      "bytes": 84125825
     }
   ],
   "type": "tar.gz",

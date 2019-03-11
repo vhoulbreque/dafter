@@ -2,7 +2,8 @@
   "name": "crime-data-2010-present-los-angeles",
   "urls": [
     {
-      "url": "https://data.lacity.org/api/views/y8tr-7khq/rows.csv?accessType=DOWNLOAD"
+      "url": "https://data.lacity.org/api/views/y8tr-7khq/rows.csv?accessType=DOWNLOAD",
+      "bytes": 442059989
     }
   ],
   "type": "csv",

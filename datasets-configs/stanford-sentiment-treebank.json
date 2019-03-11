@@ -2,7 +2,8 @@
   "name": "stanford-sentiment-treebank",
   "urls": [
     {
-      "url": "http://nlp.stanford.edu/~socherr/stanfordSentimentTreebank.zip"
+      "url": "http://nlp.stanford.edu/~socherr/stanfordSentimentTreebank.zip",
+      "bytes": 6372817
     }
   ],
   "type": "zip",

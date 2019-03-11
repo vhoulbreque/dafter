@@ -2,7 +2,8 @@
   "name": "metmuseum-objects",
   "urls": [
     {
-      "url": "https://github.com/metmuseum/openaccess/raw/master/MetObjects.csv"
+      "url": "https://github.com/metmuseum/openaccess/raw/master/MetObjects.csv",
+      "bytes": 255717535
     }
   ],
   "type": "csv",

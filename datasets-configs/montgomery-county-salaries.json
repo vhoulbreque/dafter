@@ -2,7 +2,8 @@
   "name": "montgomery-county-salaries",
   "urls": [
     {
-      "url": "https://data.montgomerycountymd.gov/api/views/xj3h-s2i7/rows.csv?accessType=DOWNLOAD"
+      "url": "https://data.montgomerycountymd.gov/api/views/xj3h-s2i7/rows.csv?accessType=DOWNLOAD",
+      "bytes": 1492532
     }
   ],
   "type": "csv",

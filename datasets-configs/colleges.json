@@ -2,7 +2,8 @@
   "name": "colleges",
   "urls": [
     {
-      "url": "https://beachpartyserver.azurewebsites.net/VueBigData/DataFiles/Colleges.txt"
+      "url": "https://beachpartyserver.azurewebsites.net/VueBigData/DataFiles/Colleges.txt",
+      "bytes": 3162832
     }
   ],
   "type": "csv",

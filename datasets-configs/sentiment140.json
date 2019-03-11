@@ -2,7 +2,8 @@
   "name": "sentiment140",
   "urls": [
     {
-      "url": "https://cs.stanford.edu/people/alecmgo/trainingandtestdata.zip"
+      "url": "https://cs.stanford.edu/people/alecmgo/trainingandtestdata.zip",
+      "bytes": 81363704
     }
   ],
   "type": "zip",

@@ -2,7 +2,8 @@
   "name": "plants-database-usda",
   "urls": [
     {
-      "url": "https://www.plants.usda.gov/java/downloadData?fileName=plantlst.txt&static=true"
+      "url": "https://www.plants.usda.gov/java/downloadData?fileName=plantlst.txt&static=true",
+      "bytes": 6780700
     }
   ],
   "type": "csv",

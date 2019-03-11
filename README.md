@@ -69,11 +69,15 @@ To add a new dataset, just add a `json` file called `name-of-the-dataset.json` i
 {
   "name": "name-of-the-dataset",
   "urls": [
-    "https://site.com/file1.tar.gz",
-    "https://site.com/file2.tar.gz",
-    "https://site.com/file3.tar.gz"
+    {
+      "https://site.com/file1.tar.gz",
+      "bytes": 45221
+    },
+    {
+      "https://site.com/file2.tar.gz",
+      "bytes": 1147803
+    }
   ],
-  "size": "23.4 MB",
   "type": "tar.gz",
   "tags": ["tag1", "tag2", "tag3"],
   "description": "This is a description of the dataset",

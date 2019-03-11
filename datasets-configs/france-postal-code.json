@@ -2,7 +2,8 @@
   "name": "france-postal-code",
   "urls": [
     {
-      "url": "https://datanova.legroupe.laposte.fr/explore/dataset/laposte_commnouv/download/?format=csv&timezone=Europe/Berlin&use_labels_for_header=true"
+      "url": "https://datanova.legroupe.laposte.fr/explore/dataset/laposte_commnouv/download/?format=csv&timezone=Europe/Berlin&use_labels_for_header=true",
+      "bytes": 228961
     }
   ],
   "type": "gz",

@@ -2,13 +2,16 @@
   "name": "svhn-street-view-house-numbers-full",
   "urls": [
     {
-      "url": "http://ufldl.stanford.edu/housenumbers/train.tar.gz"
+      "url": "http://ufldl.stanford.edu/housenumbers/train.tar.gz",
+      "bytes": 404141560
     },
     {
-      "url": "http://ufldl.stanford.edu/housenumbers/test.tar.gz"
+      "url": "http://ufldl.stanford.edu/housenumbers/test.tar.gz",
+      "bytes": 276555967
     },
     {
-      "url":"http://ufldl.stanford.edu/housenumbers/extra.tar.gz"
+      "url":"http://ufldl.stanford.edu/housenumbers/extra.tar.gz",
+      "bytes": 1955489752
     }
   ],
   "type": "tar.gz",
