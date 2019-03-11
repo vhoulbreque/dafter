@@ -1,11 +1,12 @@
 {
   "name": "open-payments",
   "urls": [
-    "http://download.cms.gov/openpayments/PGYR13_P062918.ZIP"
+    {
+      "url": "http://download.cms.gov/openpayments/PGYR13_P062918.ZIP"
+    }
   ],
   "type": "zip",
   "tags": ["gov"],
-  "size": "271 MB",
   "description": "The Open Payments Search Tool is used to search payments made by drug and medical device companies to physicians and teaching hospitals.",
   "source": "https://openpaymentsdata.cms.gov/"
 }

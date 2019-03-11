@@ -19,11 +19,11 @@ class Dataset:
                 the dataset being downloaded.
         """
         self.name = normalize_name(name)
-        self.urls = urls
+        self.urls = urls  # List of dicts ("url", "bytes")
         self.save_path = save_path
 
         if extension is None:
-            extension = normalize_filename(self.urls[0]).split('.')[-1]
+            extension = normalize_filename(self.urls[0]["url"]).split('.')[-1]
         self.extension = extension
 
         self.save_folder = os.path.join(self.save_path, self.name)
@@ -35,18 +35,17 @@ class Dataset:
         different urls.
         """
 
-        def download_file(url, local_filename, resume_byte_pose=None):
+        def download_file(url, dst, first_byte=None):
             """Download a file"""
-            if resume_byte_pose:
-                resume_header = {'Range': 'bytes=%d-' % resume_byte_pos}
-                write_mode = "ab"
-            else:
-                resume_header = {'Range': 'bytes=%d-' % 0}
-                write_mode = "wb"
+
+            if first_byte is None:
+                first_byte = 0
+
+            resume_header = {'Range': 'bytes=%s-' % (first_byte)}
 
             # Download from the beginning
             with requests.get(url, stream=True, headers=resume_header) as r:
-                with open(local_filename, write_mode) as f:
+                with open(dst, "ab") as f:
                     for chunk in r.iter_content(chunk_size=8192):
                         if chunk:  # filter out keep-alive new chunks
                             f.write(chunk)
@@ -56,7 +55,8 @@ class Dataset:
 
         stored_f_name = [os.path.join(self.save_folder, f_name)
                                 for f_name in os.listdir(self.save_folder)]
-        for i, url in enumerate(self.urls):
+        for i, url_d in enumerate(self.urls):
+            url = url_d["url"]
             print("{} / {} - {}".format(i+1, len(self.urls), url))
 
             f_name = "{}_{}.{}".format(self.name, i, self.extension) if len(self.urls) > 1 else "{}.{}".format(self.name, self.extension)

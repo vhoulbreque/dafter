@@ -109,6 +109,8 @@ def info_dataset(dataset_config):
     else:
         status = "[NOT IN DATABASE - NOT BEING DOWNLOADED]"
 
-    s = """status: {}\nname: {}\nurls: {}\n
-type: {}\ndescription: {}\n""".format(status, name, urls, type, desc)
-    print(s)
+    print("status : {}".format(status))
+    print("name : {}".format(name))
+    print("urls : {}".format("\n".join([u["url"] for u in urls])))
+    print("type : {}".format(type))
+    print("description : {}".format(desc))

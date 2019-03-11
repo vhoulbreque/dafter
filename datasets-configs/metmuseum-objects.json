@@ -1,11 +1,12 @@
 {
   "name": "metmuseum-objects",
   "urls": [
-    "https://github.com/metmuseum/openaccess/raw/master/MetObjects.csv"
+    {
+      "url": "https://github.com/metmuseum/openaccess/raw/master/MetObjects.csv"
+    }
   ],
   "type": "csv",
   "tags": ["metmuseum", "museum", "ny", "New York", "New-York"],
-  "size": "230 MB",
   "description": "The Metropolitan Museum of Art presents over 5,000 years of art from around the world for everyone to experience and enjoy. The Museum lives in three iconic sites in New York City—The Met Fifth Avenue, The Met Breuer, and The Met Cloisters. Millions of people also take part in The Met experience online.",
   "source": "https://github.com/metmuseum/openaccess/",
   "last-update": "05/11/2018"

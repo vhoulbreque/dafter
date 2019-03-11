@@ -1,9 +1,10 @@
 {
   "name": "twenty-newsgroups",
   "urls": [
-    "https://archive.ics.uci.edu/ml/machine-learning-databases/20newsgroups-mld/20_newsgroups.tar.gz"
+    {
+      "url": "https://archive.ics.uci.edu/ml/machine-learning-databases/20newsgroups-mld/20_newsgroups.tar.gz"
+    }
   ],
-  "size": "17 MB",
   "type": "tar.gz",
   "tags": ["nlp", "uci"],
   "description": "",

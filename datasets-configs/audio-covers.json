@@ -1,38 +1,93 @@
 {
   "name": "audio-covers",
   "urls": [
-    "https://archive.org/download/audio-covers/album_covers_a.tar",
-    "https://archive.org/download/audio-covers/album_covers_b.tar",
-    "https://archive.org/download/audio-covers/album_covers_c.tar",
-    "https://archive.org/download/audio-covers/album_covers_d.tar",
-    "https://archive.org/download/audio-covers/album_covers_e.tar",
-    "https://archive.org/download/audio-covers/album_covers_f.tar",
-    "https://archive.org/download/audio-covers/album_covers_g.tar",
-    "https://archive.org/download/audio-covers/album_covers_h.tar",
-    "https://archive.org/download/audio-covers/album_covers_i.tar",
-    "https://archive.org/download/audio-covers/album_covers_j.tar",
-    "https://archive.org/download/audio-covers/album_covers_k.tar",
-    "https://archive.org/download/audio-covers/album_covers_l.tar",
-    "https://archive.org/download/audio-covers/album_covers_m.tar",
-    "https://archive.org/download/audio-covers/album_covers_misc.tar",
-    "https://archive.org/download/audio-covers/album_covers_n.tar",
-    "https://archive.org/download/audio-covers/album_covers_num.tar",
-    "https://archive.org/download/audio-covers/album_covers_o.tar",
-    "https://archive.org/download/audio-covers/album_covers_p.tar",
-    "https://archive.org/download/audio-covers/album_covers_q.tar",
-    "https://archive.org/download/audio-covers/album_covers_r.tar",
-    "https://archive.org/download/audio-covers/album_covers_s.tar",
-    "https://archive.org/download/audio-covers/album_covers_t.tar",
-    "https://archive.org/download/audio-covers/album_covers_the.tar",
-    "https://archive.org/download/audio-covers/album_covers_u.tar",
-    "https://archive.org/download/audio-covers/album_covers_v.tar",
-    "https://archive.org/download/audio-covers/album_covers_w.tar",
-    "https://archive.org/download/audio-covers/album_covers_x.tar",
-    "https://archive.org/download/audio-covers/album_covers_y.tar"
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_a.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_b.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_c.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_d.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_e.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_f.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_g.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_h.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_i.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_j.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_k.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_l.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_m.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_misc.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_n.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_num.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_o.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_p.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_q.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_r.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_s.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_t.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_the.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_u.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_v.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_w.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_x.tar"
+    },
+    {
+      "url": "https://archive.org/download/audio-covers/album_covers_y.tar"
+    }
   ],
   "type": "tar",
   "tags": ["png", "jpg", "jpeg", "gif", "image"],
-  "size": "148 GB",
   "description": "Culled from various sources, this collection includes over one million JPG, PNG and GIF album covers. The resolution ranges from \"thumbnail\" through to very large sizes. Filenames are variant in usefulness, although a good number indicate at least the name of the original album.\n\nThis dataset is for experimentation and image processing research only. At 148gb, the collection is large but not unmanageable (there is a torrent available) and allows a developer or artist to work with the material through various means. The differences in resolution, filename structure and arrangement encourage machine learning or visual recognition algorithms to be used. ",
   "source": "https://archive.org/details/audio-covers/"
 }

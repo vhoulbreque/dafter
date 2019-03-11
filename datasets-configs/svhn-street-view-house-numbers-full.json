@@ -1,9 +1,15 @@
 {
   "name": "svhn-street-view-house-numbers-full",
   "urls": [
-    "http://ufldl.stanford.edu/housenumbers/train.tar.gz",
-    "http://ufldl.stanford.edu/housenumbers/test.tar.gz",
-    "http://ufldl.stanford.edu/housenumbers/extra.tar.gz"
+    {
+      "url": "http://ufldl.stanford.edu/housenumbers/train.tar.gz"
+    },
+    {
+      "url": "http://ufldl.stanford.edu/housenumbers/test.tar.gz"
+    },
+    {
+      "url":"http://ufldl.stanford.edu/housenumbers/extra.tar.gz"
+    }
   ],
   "type": "tar.gz",
   "tags": ["image", "deep-learning"],

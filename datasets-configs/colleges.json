@@ -1,11 +1,12 @@
 {
   "name": "colleges",
   "urls": [
-    "https://beachpartyserver.azurewebsites.net/VueBigData/DataFiles/Colleges.txt"
+    {
+      "url": "https://beachpartyserver.azurewebsites.net/VueBigData/DataFiles/Colleges.txt"
+    }
   ],
   "type": "csv",
   "tags": ["college"],
-  "size": "3.0 MB",
   "description": "",
   "source": "https://beachpartyserver.azurewebsites.net/VueBigData/DataFiles"
 }

@@ -1,9 +1,12 @@
 {
   "name": "plants-database-usda",
-  "urls": ["https://www.plants.usda.gov/java/downloadData?fileName=plantlst.txt&static=true"],
+  "urls": [
+    {
+      "url": "https://www.plants.usda.gov/java/downloadData?fileName=plantlst.txt&static=true"
+    }
+  ],
   "type": "csv",
   "tags": ["gov"],
-  "size": "6.8 MB",
   "description": "The Complete PLANTS Checklist is nearly 7 MB and includes Symbol, Synonym Symbol, Scientific Name with Authors, National Common Name, and Family.",
   "source": "https://www.plants.usda.gov/dl_all.html"
 }

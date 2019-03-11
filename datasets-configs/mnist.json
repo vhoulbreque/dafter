@@ -1,7 +1,10 @@
 {
   "name": "mnist",
   "urls": [
-    "https://archive.org/download/academictorrents_323a0048d87ca79b68f12a6350a57776b6a3b7fb/mnist.pkl.gz"
+    {
+      "url": "https://archive.org/download/academictorrents_323a0048d87ca79b68f12a6350a57776b6a3b7fb/mnist.pkl.gz",
+      "bytes": 16168813
+    }
   ],
   "type": "pkl.gz",
   "tags": ["deep-learning", "image"],
