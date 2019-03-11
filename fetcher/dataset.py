@@ -1,5 +1,6 @@
 import os
 import requests
+from tqdm import tqdm
 
 from .utils import normalize_name, normalize_filename
 
@@ -35,58 +36,95 @@ class Dataset:
         different urls.
         """
 
-        def download_file(url, dst, first_byte=None):
-            """Download a file"""
+        def fit_desc_size(desc):
+            LEN_FINAL_DESC = 20
+            if desc is None:
+                return " " * LEN_FINAL_DESC
+            if len(desc) == LEN_FINAL_DESC:
+                return desc
+            if len(desc) <= LEN_FINAL_DESC:
+                return " " * (LEN_FINAL_DESC-len(desc)) + desc
+            index = (LEN_FINAL_DESC-1)//2
+            return desc[:index] + ".." + desc[-index:]
+
+        def download_file(url, dst, first_byte=None, file_size=None, desc=None):
+            """Download a file
+
+            Args:
+                url (str): The url of the file to download
+                dst (str): The name of the file and its path where the
+                    downloaded file will be stored
+                first_byte (int): Non zero if the file has already been
+                    downloaded but the download has previously been
+                    interrupted. Number of bytes already downloaded
+                file_size (int): The total file size of the downloaded file
+                desc (str): The description string that is used to decorate
+                    the progress bar
+
+            Returns:
+                None
+            """
 
             if first_byte is None:
                 first_byte = 0
+            if file_size is None:
+                headers = requests.head(url).headers
+                if "Content-Length" in headers:
+                    file_size = int(headers["Content-Length"])
 
             resume_header = {'Range': 'bytes=%s-' % (first_byte)}
 
-            # Download from the beginning
-            with requests.get(url, stream=True, headers=resume_header) as r:
-                with open(dst, "ab") as f:
-                    for chunk in r.iter_content(chunk_size=8192):
-                        if chunk:  # filter out keep-alive new chunks
-                            f.write(chunk)
-                            f.flush()
+            pbar = tqdm(total=file_size, initial=first_byte, unit='B', unit_scale=True, desc=desc)
+
+            r = requests.get(url, headers=resume_header, stream=True)
+            with open(dst, 'ab') as f:
+                for chunk in r.iter_content(chunk_size=1024):
+                    if chunk:
+                        f.write(chunk)
+                        f.flush()
+                        pbar.update(len(chunk))
+            pbar.close()
 
         print("Downloading {}...".format(self.name))
 
         stored_f_name = [os.path.join(self.save_folder, f_name)
                                 for f_name in os.listdir(self.save_folder)]
+        exception = False
         for i, url_d in enumerate(self.urls):
-            url = url_d["url"]
-            print("{} / {} - {}".format(i+1, len(self.urls), url))
+            url = url_d.get("url", None)
+            file_size = url_d.get("bytes", None)
+            small_url = fit_desc_size(url.split('/')[-1])
+            desc = "{} / {} - {}".format(i+1, len(self.urls), small_url)
 
             f_name = "{}_{}.{}".format(self.name, i, self.extension) if len(self.urls) > 1 else "{}.{}".format(self.name, self.extension)
             f_name = os.path.join(self.save_folder, f_name)
 
             # Test if already downloaded
             if f_name in stored_f_name:
-                print("{} was already downloaded".format(f_name))
                 continue
 
             # Test if incomplete download
             incomplete_f_name = "{}.incomplete".format(f_name)
             if incomplete_f_name in stored_f_name:
-                resume_byte_pos = os.path.getsize(incomplete_f_name)  # 56282L
-                resume_byte_pos = str(resume_byte_pos)[:-1]
-                resume_byte_pos = int(resume_byte_pos)
+                first_byte = os.path.getsize(incomplete_f_name)  # 56282L
+                first_byte = str(first_byte)[:-1]
+                first_byte = int(first_byte)
             else:
-                resume_byte_pos = None
+                first_byte = None
 
             try:
-                download_file(url, incomplete_f_name, resume_byte_pos)
+                download_file(url, incomplete_f_name, first_byte, file_size, desc)
                 # From "datasetname.incomplete" to "datasetname"
                 os.rename(incomplete_f_name, f_name)
-                print("The dataset has been stored in {}".format(self.save_folder))
-
-                url_loader = "https://vinzeebreak.github.io/dafter-loader/docs/{}/".format(self.name)
-                print("To load the dataset inside a script or a notebook, see: {}".format(url_loader))
             except Exception as e:
+                exception = True
                 print("Failed downloading {}".format(url))
                 print("Exception : ", e)
+
+        if not exception:
+            print("The dataset has been stored in {}".format(self.save_folder))
+            url_loader = "https://vinzeebreak.github.io/dafter-loader/docs/{}/".format(self.name)
+            print("To load the dataset inside a script or a notebook, see: {}".format(url_loader))
 
     def __repr__(self):
         return self.name
