@@ -1,0 +1,14 @@
+{
+  "name": "asu-twitter-dataset",
+  "urls": [
+    {
+      "url": "http://socialcomputing.asu.edu/uploads/1296759055/Twitter-dataset.zip",
+      "bytes": 354770146
+    }
+  ],
+  "type": "zip",
+  "tags": ["twitter", "asu", "clustering", "graph", "graph-analysis"],
+  "description": "",
+  "source": "http://socialcomputing.asu.edu/datasets/Twitter",
+  "bibtex": "@misc{Zafarani+Liu:2009,\nauthor = \"R. Zafarani and H. Liu\",\nyear = \"2009\",\ntitle = \"Social Computing Data Repository at {ASU}\",\nurl = \"http://socialcomputing.asu.edu\",\ninstitution = \"Arizona State University, School of Computing, Informatics and Decision Systems Engineering\" }"
+}
