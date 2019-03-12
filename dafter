@@ -57,7 +57,7 @@ if args:
     elif action in ["list"]:
         list_datasets()
     elif not args:
-        if action in ["list"]:
+        if action in ["search"]:
             print("A tag is required\n")
             print(HELP_MESSAGE)
         elif action in ["get", "delete", "info"]:

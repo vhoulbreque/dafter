@@ -1,5 +1,6 @@
 import os
 import json
+import requests
 
 from fetcher import *
 
@@ -111,6 +112,18 @@ def is_dataset_in_db(datasetname):
         files = os.listdir(dataset_folder)
         if files:
             return True
+    return False
+
+
+def check_internet_connection():
+    """Checks if there is a working internet connection."""
+    url = 'http://www.google.com/'
+    timeout = 5
+    try:
+        _ = requests.get(url, timeout=timeout)
+        return True
+    except requests.ConnectionError as e:
+        return False
     return False
 
 

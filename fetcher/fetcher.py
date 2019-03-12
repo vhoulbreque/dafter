@@ -4,7 +4,8 @@ import shutil
 
 from fetcher import DATASETS_FOLDER, DATASETS_CONFIG_FOLDER
 from .dataset import Dataset
-from .utils import is_dataset_in_db, normalize_name, is_dataset_being_downloaded
+from .utils import is_dataset_in_db, normalize_name, is_dataset_being_downloaded, \
+    check_internet_connection
 
 
 def get_dataset(dataset_config):
@@ -19,9 +20,14 @@ def get_dataset(dataset_config):
     Returns:
         None
     """
+
     name = dataset_config["name"]
     urls = dataset_config["urls"]
     type = dataset_config["type"]
+
+    if not check_internet_connection():
+        print("Check your internet connection. Cannot download {}".format(name))
+        return
 
     if is_dataset_in_db(name) and not is_dataset_being_downloaded(name):
         print("The dataset has already been fetched")
