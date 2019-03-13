@@ -8,18 +8,18 @@ from fetcher.fetcher import get_dataset, delete_dataset, list_datasets, \
     info_dataset, search_datasets
 
 
-HELP_MESSAGE = """usage: dafter [get dataset-name] [delete dataset-name] [info dataset-name] [update] [uninstall] [list] [search tag0 .. tagN]
+HELP_MESSAGE = """usage: dafter [get dataset-name] [delete dataset-name] [info dataset-name] [update] [uninstall] [list [dataset-name] [--tags tag0 .. tagN]] [search [dataset-name] [--tags tag0 .. tagN]]
 
 Fetches all kind of datasets, whatever the format. Without pain.
 
 Positional arguments:
-  get dataset-name        Downloads and saves the dataset files
-  delete dataset-name     Deletes the dataset files from the disk
-  info dataset-name       Describes the dataset
-  update                  Updates dafter
-  uninstall               Uninstalls dafter
-  list                    Lists all the datasets that are in database
-  search tag0 .. tagN     Lists all the datasets available with these tags
+  get dataset-name                               Downloads and saves the dataset files
+  delete dataset-name                            Deletes the dataset files from the disk
+  info dataset-name                              Describes the dataset
+  list [dataset-name] [--tags tag0 .. tagN]      Lists all the datasets that are in database
+  search [dataset-name] [--tags tag0 .. tagN]    Lists all the datasets available with these tags
+  update                                         Updates dafter
+  uninstall                                      Uninstalls dafter
 """
 
 args = sys.argv[1:]
@@ -27,7 +27,7 @@ args = sys.argv[1:]
 if args:
     action = args[0]
     if action not in ["get", "delete", "list", "search", "info", "update", "uninstall", "help"]:
-        print("This command `dafter {}` does not exist\n".format(action))
+        print("error: This command `dafter {}` does not exist\n".format(action))
         print(HELP_MESSAGE)
 
     args = args[1:]
@@ -49,21 +49,44 @@ if args:
             elif action == "info":
                 info_dataset(dataset_config)
         else:
-            print("The dataset `{}` does not exist".format(datasetname))
-    elif args and action in ["search"]:
-        tags = ",".join(args).split(",")
-        tags = [t.strip() for t in tags]
-        search_datasets(tags)
-    elif action in ["list"]:
-        list_datasets()
+            print("error: The dataset `{}` does not exist".format(datasetname))
+    elif action in ["search", "list"]:
+        stop = False
+        # Find dataset name
+        if args:
+            if args[0] != "--tags":
+                dataset_name = args[0]
+                args = args[1:]
+            else:
+                dataset_name = None
+        else:
+            dataset_name = None
+        # Find tags
+        if args:
+            if args[0] == "--tags":
+                if len(args) == 1:
+                    print("error: A tag or several tags are required\n")
+                    print(HELP_MESSAGE)
+                    stop = True
+                else:
+                    args = args[1:]
+                    tags = []
+                    while args and args[0][0] != "-":
+                        tags.append(args[0])
+                        args = args[1:]
+        else:
+            tags = None
+        if not stop:
+            if action in ["search"]:
+                search_datasets(dataset_name, tags)
+            elif action in ["list"]:
+                list_datasets(dataset_name, tags)
     elif not args:
-        if action in ["search"]:
-            print("A tag is required\n")
-            print(HELP_MESSAGE)
-        elif action in ["get", "delete", "info"]:
-            print("A dataset name is required\n")
+        if action in ["get", "delete", "info"]:
+            print("error: A dataset name is required\n")
             print(HELP_MESSAGE)
     else:
         print(HELP_MESSAGE)
 else:
+    print("error: `dafter` requires an argument.\n")
     print(HELP_MESSAGE)

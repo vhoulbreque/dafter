@@ -28,14 +28,22 @@ To delete MNIST from the database:
 dafter delete mnist
 ```
 
-To search all available datasets that have a certain tag, say `image` and `deep-learning`:
+To search among available datasets:
 ```bash
-dafter search image deep-learning
+# Search all available datasets
+dafter search
+# Search all available datasets that have the tags "image" and "deep-learning"
+# and whose name contains "mni"
+dafter search mni --tags image deep-learning
 ```
 
 To list all downloaded datasets:
 ```bash
+# Lists all datasets in database
 dafter list
+# Lists all datasets in database that have the tag "twitter" and whose name
+# contains "sentiment"
+dafter list sentiment --tags twitter
 ```
 
 ## Update

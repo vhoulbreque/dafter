@@ -72,61 +72,31 @@ def get_all_datasets():
         yield config
 
 
-def search_datasets(tags):
+def search_datasets(dataset_name, tags):
     """Lists all the datasets names in the config files that have the tags
-    `tags`. Prints all the names and the statuses of all the datasets that
-    match this criteria.
+    `tags` and the name `dataset_name`. Prints all the names and the statuses of
+    all the datasets that match this criteria.
 
     Args:
+        dataset_name (str): A string which is a substring of the datasets' names
+            we will return
         tag (list of str): The tags.
 
     Returns:
         None
     """
+    def valid_dataset(dataset_name, dn, tags, config):
+        if dataset_name:
+            if dataset_name not in dn:
+                return False
 
-    tags = list(set(tags))
+        if tags:
+            for t in tags:
+                if t not in config_tags:
+                    return False
+        return True
 
-    printed_list = []
-    for config in get_all_datasets():
-        config_tags = config["tags"]
-        dn = config["name"]
-        for t in tags:
-            if t not in config_tags:
-                break
-        else:
-            # Our dataset has all the tags needed
-            in_db = is_dataset_in_db(dn)
-            is_being_downloaded = is_dataset_being_downloaded(dn)
-
-            if in_db and not is_being_downloaded:
-                status = "X"
-            elif in_db and is_being_downloaded:
-                status = "/"
-            else:
-                status = " "
-
-            printed_list.append("{} {}".format(status, dn))
-
-    if printed_list:
-        printed_list = sorted(printed_list)
-        print("\n".join(printed_list))
-
-
-def list_datasets():
-    """Lists all the dataset names of the downloaded datasets.
-
-    Args:
-        None
-
-    Returns:
-        None
-    """
-
-    printed_list = []
-    for config in get_all_datasets():
-        config_tags = config["tags"]
-        dn = config["name"]
-
+    def get_status_icon(dataset_name):
         # Our dataset has all the tags needed
         in_db = is_dataset_in_db(dn)
         is_being_downloaded = is_dataset_being_downloaded(dn)
@@ -136,8 +106,80 @@ def list_datasets():
         elif in_db and is_being_downloaded:
             status = "/"
         else:
+            status = " "
+        return status
+
+    if tags:
+        tags = list(set(tags))
+        tags = [t.strip() for t in tags]
+
+    if dataset_name:
+        dataset_name = dataset_name.strip()
+
+    printed_list = []
+    for config in get_all_datasets():
+        config_tags = config["tags"]
+        dn = config["name"]
+
+        if not valid_dataset(dataset_name, dn, tags, config):
             continue
 
+        status = get_status_icon(dn)
+        printed_list.append("{} {}".format(status, dn))
+
+    if printed_list:
+        printed_list = sorted(printed_list)
+        print("\n".join(printed_list))
+
+
+def list_datasets(dataset_name, tags):
+    """Lists all the dataset names of the downloaded datasets.
+
+    Args:
+        dataset_name (str): A string which is a substring of the datasets' names
+            we will return
+        tag (list of str): The tags.
+
+    Returns:
+        None
+    """
+    def valid_dataset(dataset_name, dn, tags, config):
+        in_db = is_dataset_in_db(dn)
+        if not in_db:
+            return False
+
+        if dataset_name:
+            if dataset_name not in dn:
+                return False
+
+        if tags:
+            for t in tags:
+                if t not in config_tags:
+                    return False
+        return True
+
+    def get_status_icon(dataset_name):
+        # Our dataset has all the tags needed
+        in_db = is_dataset_in_db(dn)
+        is_being_downloaded = is_dataset_being_downloaded(dn)
+
+        if in_db and not is_being_downloaded:
+            status = "X"
+        elif in_db and is_being_downloaded:
+            status = "/"
+        else:
+            status = " "
+        return status
+
+    printed_list = []
+    for config in get_all_datasets():
+        config_tags = config["tags"]
+        dn = config["name"]
+
+        if not valid_dataset(dataset_name, dn, tags, config):
+            continue
+
+        status = get_status_icon(dn)
         printed_list.append("{} {}".format(status, dn))
 
     if printed_list:
