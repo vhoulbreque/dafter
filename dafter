@@ -3,7 +3,7 @@
 import sys
 
 from fetcher.utils import get_config_dataset, update_dafter, \
-    uninstall_dafter
+    uninstall_dafter, get_version
 from fetcher.fetcher import get_dataset, delete_dataset, list_datasets, \
     info_dataset, search_datasets
 
@@ -26,14 +26,26 @@ args = sys.argv[1:]
 
 if args:
     action = args[0]
-    if action not in ["get", "delete", "list", "search", "info", "update", "uninstall", "help"]:
-        print("error: This command `dafter {}` does not exist\n".format(action))
-        print(HELP_MESSAGE)
+    if action[0] != "-":
+        if action not in ["get", "delete", "list", "search", "info", "update", "uninstall", "help", "version"]:
+            print("error: This command `dafter {}` does not exist\n".format(action))
+            print(HELP_MESSAGE)
+    else:
+        if action in ["--help", "-h"]:
+            action = "help"
+        elif action in ["-V", "--version"]:
+            action = "version"
+        else:
+            print("error: This command `dafter {}` does not exist\n".format(action))
+            print(HELP_MESSAGE)
 
     args = args[1:]
 
     if action in ["help"]:
         print(HELP_MESSAGE)
+    elif action in ["version"]:
+        version = get_version()
+        print(version)
     elif action in ["update"]:
         update_dafter()
     elif action in ["uninstall"]:

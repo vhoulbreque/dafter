@@ -127,6 +127,12 @@ def check_internet_connection():
     return False
 
 
+def get_version():
+    version_file = "VERSION.txt"
+    with open(version_file) as f:
+        version = [l.strip() for l in f][0]
+        return version
+
 def update_dafter():
     """Updates dafter. Downloads and executes the "update.sh" script."""
     import subprocess
