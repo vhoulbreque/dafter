@@ -5,7 +5,7 @@ import os
 import json
 import requests
 
-from fetcher import *
+from .constants import DATASETS_FOLDER, DATASETS_CONFIG_FOLDER
 
 
 def is_dataset_being_downloaded(datasetname):

@@ -5,7 +5,7 @@ import os
 import json
 import shutil
 
-from fetcher import DATASETS_FOLDER, DATASETS_CONFIG_FOLDER
+from .constants import DATASETS_FOLDER, DATASETS_CONFIG_FOLDER
 from .dataset import Dataset
 from .utils import is_dataset_in_db, normalize_name, is_dataset_being_downloaded, \
     check_internet_connection
