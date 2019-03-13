@@ -203,6 +203,8 @@ def info_dataset(dataset_config):
     urls = dataset_config["urls"]
     type = dataset_config["type"]
     desc = dataset_config["description"]
+    tags = dataset_config["tags"]
+    loader_url = "https://vinzeebreak.github.io/dafter-loader/docs/{}/".format(name)
 
     in_db = is_dataset_in_db(name)
     is_being_downloaded = is_dataset_being_downloaded(name)
@@ -219,3 +221,5 @@ def info_dataset(dataset_config):
     print("urls : {}".format("\n".join([u["url"] for u in urls])))
     print("type : {}".format(type))
     print("description : {}".format(desc))
+    print("tags : {}".format(" | ".join(tags)))
+    print("How to load this dataset: {}".format(loader_url))
