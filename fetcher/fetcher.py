@@ -221,5 +221,5 @@ def info_dataset(dataset_config):
     print("urls : {}".format("\n".join([u["url"] for u in urls])))
     print("type : {}".format(type))
     print("description : {}".format(desc))
-    print("tags : {}".format(" | ".join(tags)))
+    print("tags : {}".format(" - ".join(tags)))
     print("How to load this dataset: {}".format(loader_url))
