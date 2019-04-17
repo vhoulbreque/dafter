@@ -5,7 +5,7 @@ import os
 import json
 import requests
 
-from .constants import DATASETS_FOLDER, DATASETS_CONFIG_FOLDER
+from .constants import DATASETS_FOLDER, DATASETS_CONFIG_FOLDER, VERSION_FILE
 
 
 def is_dataset_being_downloaded(datasetname):
@@ -131,10 +131,10 @@ def check_internet_connection():
 
 
 def get_version():
-    version_file = "VERSION.txt"
-    with open(version_file) as f:
+    with open(VERSION_FILE) as f:
         version = [l.strip() for l in f][0]
         return version
+
 
 def update_dafter():
     """Updates dafter. Downloads and executes the "update.sh" script."""
