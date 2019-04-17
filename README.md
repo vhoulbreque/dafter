@@ -2,7 +2,7 @@
 
 ## You just found the ultimate datafetcher
 
-Fetches all kind of datasets, whatever the format.
+Fetches all kinds of public datasets, whatever the format, from the command line.
 
  - [Install](#install)
  - [Commands](#commands)
@@ -11,7 +11,7 @@ Fetches all kind of datasets, whatever the format.
 
 ## Install
 
-**Up-to-date version**:
+To install dafter, just do:
 ```bash
 curl https://raw.githubusercontent.com/vinzeebreak/dafter-install/master/install.sh -sSf | bash -s -- --up-to-date
 ```
