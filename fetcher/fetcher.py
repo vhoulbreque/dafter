@@ -37,7 +37,11 @@ def get_dataset(dataset_config):
         return
 
     dataset = Dataset(name, urls, extension=type, save_path=DATASETS_FOLDER)
-    dataset.download()
+    try:
+        dataset.download()
+    except KeyboardInterrupt as e:
+        print("\nThe download has been interrupted. "
+              "Run \"dafter get {}\" to resume download".format(name))
 
 
 def delete_dataset(dataset_config):
