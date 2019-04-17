@@ -1,15 +1,17 @@
-# dafter
+# dafter : the data fetcher
 
-## You just found the ultimate datafetcher
+![dafter-logo](docs/dafter_logo.png)
 
-Fetches all kinds of public datasets, whatever the format, from the command line.
+## You have just found dafter.
 
- - [Install](#install)
+Dafter is a command line downloader of public datasets. It takes care of downloading and formatting the datasets' files so that you can spend hours building models instead of looking for datasets and their urls.
+
+ - [Install](#install-dafter)
  - [Commands](#commands)
  - [How to contribute](#how-to-contribute)
 
 
-## Install
+## Install dafter
 
 To install dafter, just do:
 ```bash
@@ -23,12 +25,12 @@ To download the MNIST dataset:
 dafter get mnist
 ```
 
-To delete MNIST from the database:
+To delete MNIST from your machine:
 ```bash
 dafter delete mnist
 ```
 
-To search among available datasets:
+To search among downloadable datasets:
 ```bash
 # Search all available datasets
 dafter search
@@ -37,7 +39,7 @@ dafter search
 dafter search mni --tags image deep-learning
 ```
 
-To list all downloaded datasets:
+To list all the datasets that have been downloaded and are stored on your machine:
 ```bash
 # Lists all datasets in database
 dafter list
