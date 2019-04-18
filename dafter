@@ -2,16 +2,16 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import argparse
 
-from fetcher.utils import get_config_dataset, update_dafter, \
-    uninstall_dafter, get_version
+from fetcher.utils import get_config_dataset, update_dafter, uninstall_dafter, \
+    get_version
 from fetcher.fetcher import get_dataset, delete_dataset, list_datasets, \
     info_dataset, search_datasets
 
 
-HELP_MESSAGE = """usage: dafter [get dataset-name] [delete dataset-name] [info dataset-name] [update] [uninstall] [list [dataset-name] [--tags tag0 .. tagN]] [search [dataset-name] [--tags tag0 .. tagN]]
-
-Fetches all kind of datasets, whatever the format. Without pain.
+DESCRIPTION = "Fetches all kind of datasets, whatever the format. Without pain."
+USAGE = """usage: dafter [get dataset-name] [delete dataset-name] [info dataset-name] [update] [uninstall] [list [dataset-name] [--tags tag0 .. tagN]] [search [dataset-name] [--tags tag0 .. tagN]]
 
 Positional arguments:
   get dataset-name                               Downloads and saves the dataset files
@@ -23,83 +23,102 @@ Positional arguments:
   uninstall                                      Uninstalls dafter
 """
 
-args = sys.argv[1:]
 
-if args:
-    action = args[0]
-    if action[0] != "-":
-        if action not in ["get", "delete", "list", "search", "info", "update", "uninstall", "help", "version"]:
-            print("error: This command `dafter {}` does not exist\n".format(action))
-            print(HELP_MESSAGE)
-    else:
-        if action in ["--help", "-h"]:
-            action = "help"
-        elif action in ["-V", "--version"]:
-            action = "version"
-        else:
-            print("error: This command `dafter {}` does not exist\n".format(action))
-            print(HELP_MESSAGE)
+class DafterCLI():
 
-    args = args[1:]
+    def __init__(self):
 
-    if action in ["help"]:
-        print(HELP_MESSAGE)
-    elif action in ["version"]:
-        version = get_version()
-        print(version)
-    elif action in ["update"]:
-        update_dafter()
-    elif action in ["uninstall"]:
-        uninstall_dafter()
-    elif args and action in ["get", "delete", "info"]:
-        datasetname = args[0]
-        dataset_config = get_config_dataset(datasetname)
+        self.parser = argparse.ArgumentParser(description=DESCRIPTION, usage=USAGE)
+
+        self.parser.add_argument("command", help="Subcommand to run")
+        args = self.parser.parse_args(sys.argv[1:2])
+        if not hasattr(self, args.command):
+            print("Unrecognized command")
+            self.parser.print_help()
+            exit(1)
+        getattr(self, args.command)()
+
+
+    def help(self):
+        self.parser.print_help()
+        exit(1)
+
+    def get(self):
+        self.parser = argparse.ArgumentParser(description="Downloads and saves the dataset files")
+        self.parser.add_argument('datasetname', help="Name of the dataset")
+
+        args = self.parser.parse_args(sys.argv[2:])
+
+        if not hasattr(args, "datasetname"):
+            print("A dataset name is required")
+            self.parser.print_help()
+            exit(1)
+
+        dataset_config = get_config_dataset(args.datasetname)
         if dataset_config:
-            if action == "get":
-                get_dataset(dataset_config)
-            elif action == "delete":
-                delete_dataset(dataset_config)
-            elif action == "info":
-                info_dataset(dataset_config)
-        else:
-            print("error: The dataset `{}` does not exist".format(datasetname))
-    elif action in ["search", "list"]:
-        stop = False
-        # Find dataset name
-        if args:
-            if args[0] != "--tags":
-                dataset_name = args[0]
-                args = args[1:]
-            else:
-                dataset_name = None
-        else:
-            dataset_name = None
-        # Find tags
-        if args:
-            if args[0] == "--tags":
-                if len(args) == 1:
-                    print("error: A tag or several tags are required\n")
-                    print(HELP_MESSAGE)
-                    stop = True
-                else:
-                    args = args[1:]
-                    tags = []
-                    while args and args[0][0] != "-":
-                        tags.append(args[0])
-                        args = args[1:]
-        else:
-            tags = None
-        if not stop:
-            if action in ["search"]:
-                search_datasets(dataset_name, tags)
-            elif action in ["list"]:
-                list_datasets(dataset_name, tags)
-    elif not args:
-        if action in ["get", "delete", "info"]:
-            print("error: A dataset name is required\n")
-            print(HELP_MESSAGE)
-    else:
-        print(HELP_MESSAGE)
-else:
-    print("error: `dafter` requires an argument.\n")
-    print(HELP_MESSAGE)
+            get_dataset(dataset_config)
+
+    def delete(self):
+        self.parser = argparse.ArgumentParser(description="Deletes the dataset files from the disk")
+        self.parser.add_argument('datasetname', help="Name of the dataset")
+
+        args = self.parser.parse_args(sys.argv[2:])
+
+        if not hasattr(args, "datasetname"):
+            print("A dataset name is required")
+            self.parser.print_help()
+            exit(1)
+
+        dataset_config = get_config_dataset(args.datasetname)
+        if dataset_config:
+            delete_dataset(dataset_config)
+
+    def info(self):
+        self.parser = argparse.ArgumentParser(description="Describes the dataset")
+        self.parser.add_argument('datasetname', help="Name of the dataset")
+
+        args = self.parser.parse_args(sys.argv[2:])
+
+        if not hasattr(args, "datasetname"):
+            print("A dataset name is required")
+            self.parser.print_help()
+            exit(1)
+
+        dataset_config = get_config_dataset(args.datasetname)
+        if dataset_config:
+            info_dataset(dataset_config)
+
+    def update(self):
+        self.parser = argparse.ArgumentParser(description="Updates dafter")
+        update_dafter()
+
+    def uninstall(self):
+        self.parser = argparse.ArgumentParser(description="Uninstalls dafter")
+        uninstall_dafter()
+
+    def search(self):
+        self.parser = argparse.ArgumentParser(description="Lists all the datasets available with these tags")
+        self.parser.add_argument("datasetname", help="keyword", nargs="?", default=None)
+        self.parser.add_argument('--tags', help="tags", nargs='+', required=False)
+
+        args = self.parser.parse_args(sys.argv[2:])
+
+        datasetname = args.datasetname if hasattr(args, "datasetname") else None
+        tags = args.tags if args.tags else []
+
+        search_datasets(datasetname, tags)
+
+    def list(self):
+        self.parser = argparse.ArgumentParser(description="Lists all the datasets that are in database")
+        self.parser.add_argument("datasetname", help="keyword", nargs="?", default=None)
+        self.parser.add_argument('--tags', help="tags", nargs='+', required=False)
+
+        args = self.parser.parse_args(sys.argv[2:])
+
+        datasetname = args.datasetname if hasattr(args, "datasetname") else None
+        tags = args.tags if hasattr(args, "tags") else []
+
+        list_datasets(datasetname, tags)
+
+
+DafterCLI()
