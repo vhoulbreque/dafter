@@ -109,8 +109,8 @@ class Dataset:
             # Test if incomplete download
             incomplete_f_name = "{}.incomplete".format(f_name)
             if incomplete_f_name in stored_f_name:
-                first_byte = os.path.getsize(incomplete_f_name)  # 56282L
-                first_byte = str(first_byte)[:-1]
+                first_byte = str(os.path.getsize(incomplete_f_name))  # 56282L
+                first_byte = "".join(c for c in first_byte if c.isdigit())
                 first_byte = int(first_byte)
             else:
                 first_byte = None
