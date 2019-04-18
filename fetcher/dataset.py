@@ -126,7 +126,7 @@ class Dataset:
 
         if not exception:
             print("The dataset has been stored in {}".format(self.save_folder))
-            url_loader = "https://vinzeebreak.github.io/dafter-loader/docs/{}/".format(self.name)
+            url_loader = "https://vinzeebreak.github.io/dafter-loader/docs/datasets/{}/".format(self.name)
             print("To load the dataset inside a script or a notebook, see: {}".format(url_loader))
 
     def __repr__(self):
