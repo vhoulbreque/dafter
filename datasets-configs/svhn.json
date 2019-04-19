@@ -1,5 +1,5 @@
 {
-  "name": "svhn-street-view-house-numbers-full",
+  "name": "svhn",
   "urls": [
     {
       "url": "http://ufldl.stanford.edu/housenumbers/train.tar.gz",
