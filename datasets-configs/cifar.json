@@ -1,0 +1,12 @@
+{
+  "name": "cifar",
+  "urls": [
+    {
+      "url": "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"
+    }
+  ],
+  "type": "tar.gz",
+  "tags": ["image", "vision", "deep-learning", "dl"],
+  "description": "",
+  "source": "https://www.cs.toronto.edu/~kriz/cifar.html"
+}
