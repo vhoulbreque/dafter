@@ -1,0 +1,17 @@
+{
+  "name": "trec",
+  "urls": [
+    {
+      "url": "http://cogcomp.org/Data/QA/QC/train_5500.label",
+      "bytes": 335858
+    },
+    {
+      "url": "http://cogcomp.org/Data/QA/QC/TREC_10.label",
+      "bytes": 23354
+    }
+  ],
+  "type": "tar",
+  "tags": ["text", "nlp", "question", "answer"],
+  "description": "",
+  "source": "http://cogcomp.org/"
+}
