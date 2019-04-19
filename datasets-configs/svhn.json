@@ -15,7 +15,7 @@
     }
   ],
   "type": "tar.gz",
-  "tags": ["image", "deep-learning"],
+  "tags": ["image", "deep-learning", "dl", "vision"],
   "description": "These are the original, variable-resolution, color house-number images with character level bounding boxes, as shown in the examples images above. (The blue bounding boxes here are just for illustration purposes. The bounding box information are stored in digitStruct.mat instead of drawn directly on the images in the dataset.) Each tar.gz file contains the orignal images in png format, together with a digitStruct.mat file, which can be loaded using Matlab. The digitStruct.mat file contains a struct called digitStruct with the same length as the number of original images. Each element in digitStruct has the following fields: name which is a string containing the filename of the corresponding image. bbox which is a struct array that contains the position, size and label of each digit bounding box in the image. Eg: digitStruct(300).bbox(2).height gives height of the 2nd digit bounding box in the 300th image.",
   "source": "http://ufldl.stanford.edu/housenumbers/"
 }
