@@ -141,7 +141,7 @@ def update_dafter():
     import subprocess
 
     bash_command = "cd $HOME && curl https://raw.githubusercontent.com/vinzeebreak/dafter-install/master/update.sh -sSf | bash"
-    output = subprocess.check_output(['bash','-c', bash_command])
+    subprocess.call(bash_command, shell=True)
 
 
 def uninstall_dafter():
@@ -149,4 +149,4 @@ def uninstall_dafter():
     import subprocess
 
     bash_command = "cd $HOME && curl https://raw.githubusercontent.com/vinzeebreak/dafter-install/master/uninstall.sh -sSf | bash"
-    output = subprocess.check_output(['bash','-c', bash_command])
+    subprocess.call(bash_command, shell=True)
