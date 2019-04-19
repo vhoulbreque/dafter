@@ -1,0 +1,15 @@
+{
+  "name": "imagenet",
+  "urls": [
+    {
+      "url": "http://www.image-net.org/challenges/LSVRC/2012/nnoupb/ILSVRC2012_img_train.tar"
+    },
+    {
+      "url": "http://www.image-net.org/challenges/LSVRC/2012/nnoupb/ILSVRC2012_img_val.tar"
+    }
+  ],
+  "type": "tar",
+  "tags": ["image", "vision", "deep-learning", "dl"],
+  "description": "2012 Classification Dataset",
+  "source": "http://www.image-net.org/"
+}
