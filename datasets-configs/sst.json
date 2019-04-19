@@ -1,0 +1,13 @@
+{
+  "name": "sst",
+  "urls": [
+    {
+      "url": "http://nlp.stanford.edu/sentiment/trainDevTestTrees_PTB.zip",
+      "bytes": 789539
+    }
+  ],
+  "type": "zip",
+  "tags": ["text", "nlp", "sentiment"],
+  "description": "",
+  "source": "http://nlp.stanford.edu/sentiment/"
+}
