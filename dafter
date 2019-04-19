@@ -38,7 +38,6 @@ class DafterCLI():
             exit(1)
         getattr(self, args.command)()
 
-
     def help(self):
         self.parser.print_help()
         exit(1)
