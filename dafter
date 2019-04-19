@@ -29,7 +29,15 @@ class DafterCLI():
     def __init__(self):
 
         self.parser = argparse.ArgumentParser(description=DESCRIPTION, usage=USAGE)
+        self.parser.add_argument("-v", "--version", help="get the version", action="store_true")
 
+        args = self.parser.parse_args(sys.argv[1:2])
+
+        if args.version:
+            self.version()
+            exit(1)
+
+        self.parser = argparse.ArgumentParser(description=DESCRIPTION, usage=USAGE)
         self.parser.add_argument("command", help="Subcommand to run")
         args = self.parser.parse_args(sys.argv[1:2])
         if not hasattr(self, args.command):
@@ -40,6 +48,11 @@ class DafterCLI():
 
     def help(self):
         self.parser.print_help()
+        exit(1)
+
+    def version(self):
+        v = get_version()
+        print(v)
         exit(1)
 
     def get(self):
