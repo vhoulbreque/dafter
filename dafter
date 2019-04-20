@@ -21,25 +21,18 @@ Positional arguments:
   search [dataset-name] [--tags tag0 .. tagN]    Lists all the datasets available with these tags
   update                                         Updates dafter
   uninstall                                      Uninstalls dafter
+  version                                        Get the version of dafter
 """
 
 
 class DafterCLI():
 
     def __init__(self):
-
-        self.parser = argparse.ArgumentParser(description=DESCRIPTION, usage=USAGE)
-        self.parser.add_argument("-v", "--version", help="get the version", action="store_true")
-
-        args = self.parser.parse_args(sys.argv[1:2])
-
-        if args.version:
-            self.version()
-            exit(1)
-
         self.parser = argparse.ArgumentParser(description=DESCRIPTION, usage=USAGE)
         self.parser.add_argument("command", help="Subcommand to run")
+
         args = self.parser.parse_args(sys.argv[1:2])
+
         if not hasattr(self, args.command):
             print("Unrecognized command")
             self.parser.print_help()
@@ -53,7 +46,6 @@ class DafterCLI():
     def version(self):
         v = get_version()
         print(v)
-        exit(1)
 
     def get(self):
         self.parser = argparse.ArgumentParser(description="Downloads and saves the dataset files")
