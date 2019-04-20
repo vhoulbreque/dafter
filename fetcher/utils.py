@@ -27,9 +27,19 @@ def is_dataset_being_downloaded(datasetname):
     for folder in folders:
         if folder == datasetname:
             files = os.listdir(os.path.join(DATASETS_FOLDER, folder))
+
+            # First, test if an incomplete file is present
             for filename in files:
                 if "incomplete" in filename:
                     return True
+
+            # Second, test if all the files have been downloaded
+            config = get_config_dataset(datasetname)
+            if len(config["urls"]) != len(files):
+                return True
+
+            break
+
     return False
 
 
