@@ -15,7 +15,7 @@ Dafter is a command line downloader of public datasets. It takes care of downloa
 
 To install dafter, just do:
 ```bash
-curl https://raw.githubusercontent.com/vinzeebreak/dafter-install/master/install.sh -sSf | bash -s -- --up-to-date
+curl https://raw.githubusercontent.com/vinzeebreak/dafter-install/master/install.sh -sSf | bash
 ```
 
 ## Commands
