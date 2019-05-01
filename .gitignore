@@ -1,5 +1,9 @@
 # Python
 
+build
+dist
+dafter.egg-info
+
 *.pyc
 __pycache__/
 data
