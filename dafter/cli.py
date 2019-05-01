@@ -4,14 +4,13 @@
 import sys
 import argparse
 
-from dafter.fetcher.utils import get_config_dataset, update_dafter, uninstall_dafter, \
-    get_version
+from dafter.fetcher.utils import get_config_dataset, get_version
 from dafter.fetcher.fetcher import get_dataset, delete_dataset, list_datasets, \
     info_dataset, search_datasets
 
 
 DESCRIPTION = "Fetches all kind of datasets, whatever the format. Without pain."
-USAGE = """usage: dafter [get dataset-name] [delete dataset-name] [info dataset-name] [update] [uninstall] [list [dataset-name] [--tags tag0 .. tagN]] [search [dataset-name] [--tags tag0 .. tagN]]
+USAGE = """usage: dafter [get dataset-name] [delete dataset-name] [info dataset-name] [list [dataset-name] [--tags tag0 .. tagN]] [search [dataset-name] [--tags tag0 .. tagN]]
 
 Positional arguments:
   get dataset-name                               Downloads and saves the dataset files
@@ -19,8 +18,6 @@ Positional arguments:
   info dataset-name                              Describes the dataset
   list [dataset-name] [--tags tag0 .. tagN]      Lists all the datasets that are in database
   search [dataset-name] [--tags tag0 .. tagN]    Lists all the datasets available with these tags
-  update                                         Updates dafter
-  uninstall                                      Uninstalls dafter
   version                                        Get the version of dafter
 """
 
@@ -90,14 +87,6 @@ class DafterCLI():
         dataset_config = get_config_dataset(args.datasetname)
         if dataset_config:
             info_dataset(dataset_config)
-
-    def update(self):
-        self.parser = argparse.ArgumentParser(description="Updates dafter")
-        update_dafter()
-
-    def uninstall(self):
-        self.parser = argparse.ArgumentParser(description="Uninstalls dafter")
-        uninstall_dafter()
 
     def search(self):
         self.parser = argparse.ArgumentParser(description="Lists all the datasets available with these tags")

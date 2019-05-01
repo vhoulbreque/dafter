@@ -144,19 +144,3 @@ def get_version():
     with open(VERSION_FILE) as f:
         version = [l.strip() for l in f][0]
         return version
-
-
-def update_dafter():
-    """Updates dafter. Downloads and executes the "update.sh" script."""
-    import subprocess
-
-    bash_command = "cd $HOME && curl https://raw.githubusercontent.com/vinzeebreak/dafter-install/master/update.sh -sSf | bash"
-    subprocess.call(bash_command, shell=True)
-
-
-def uninstall_dafter():
-    """Uninstall dafter. Downloads and executes the "uninstall.sh" script."""
-    import subprocess
-
-    bash_command = "cd $HOME && curl https://raw.githubusercontent.com/vinzeebreak/dafter-install/master/uninstall.sh -sSf | bash"
-    subprocess.call(bash_command, shell=True)

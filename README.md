@@ -15,7 +15,7 @@ Dafter is a command line downloader of public datasets. It takes care of downloa
 
 To install dafter, just do:
 ```bash
-curl https://raw.githubusercontent.com/vinzeebreak/dafter-install/master/install.sh -sSf | bash
+pip install dafter
 ```
 
 ## Commands
@@ -52,7 +52,7 @@ dafter list sentiment --tags twitter
 
 To update `dafter`, do:
 ```bash
-dafter update
+pip install --upgrade dafter
 ```
 
 ## Uninstall
@@ -60,9 +60,7 @@ dafter update
 To uninstall `dafter`, do:
 
 ```bash
-dafter uninstall
-# or
-curl https://raw.githubusercontent.com/vinzeebreak/dafter-install/master/uninstall.sh -sSf | bash
+pip uninstall dafter
 ```
 
 ## How to contribute?
