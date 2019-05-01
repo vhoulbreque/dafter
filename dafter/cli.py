@@ -1,12 +1,12 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+#!/usr/bin/python
+# coding=utf-8
 
 import sys
 import argparse
 
-from fetcher.utils import get_config_dataset, update_dafter, uninstall_dafter, \
+from dafter.fetcher.utils import get_config_dataset, update_dafter, uninstall_dafter, \
     get_version
-from fetcher.fetcher import get_dataset, delete_dataset, list_datasets, \
+from dafter.fetcher.fetcher import get_dataset, delete_dataset, list_datasets, \
     info_dataset, search_datasets
 
 
@@ -23,7 +23,6 @@ Positional arguments:
   uninstall                                      Uninstalls dafter
   version                                        Get the version of dafter
 """
-
 
 class DafterCLI():
 
@@ -124,5 +123,5 @@ class DafterCLI():
 
         list_datasets(datasetname, tags)
 
-
-DafterCLI()
+def main():
+    DafterCLI()
