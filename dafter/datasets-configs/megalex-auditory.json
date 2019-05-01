@@ -1,0 +1,17 @@
+{
+    "name": "megalex-auditory",
+    "description": "Megalex-auditory provides auditory lexical decision times and accuracy rates for 17878 French words",
+    "source": "http://www.lexique.org/databases/Megalex",
+    "urls": [
+      {
+        "url": "http://www.lexique.org/databases/Megalex/Megalex-auditory.rds",
+        "bytes": 751945
+      },
+      {
+        "url": "http://www.lexique.org/databases/Megalex/Megalex-items-auditory.tsv",
+        "bytes": 1673559
+      }
+    ],
+    "type": "tsv",
+    "tags": ["french", "lexical-decision"]
+}
