@@ -99,7 +99,7 @@ class Dataset:
             small_url = fit_desc_size(url.split('/')[-1])
             desc = "{} / {} - {}".format(i+1, len(self.urls), small_url)
 
-            f_name = "{}_{}.{}".format(self.name, i, self.extension) if len(self.urls) > 1 else "{}.{}".format(self.name, self.extension)
+            f_name = url.split("/")[-1]
             f_name = os.path.join(self.save_folder, f_name)
 
             # Test if already downloaded
@@ -126,8 +126,8 @@ class Dataset:
 
         if not exception:
             print("The dataset has been stored in {}".format(self.save_folder))
-            url_loader = "https://vinzeebreak.github.io/dafter-loader/docs/datasets/{}/".format(self.name)
-            print("To load the dataset inside a script or a notebook, see: {}".format(url_loader))
+            # url_loader = "https://vinzeebreak.github.io/dafter-loader/docs/datasets/{}/".format(self.name)
+            # print("To load the dataset inside a script or a notebook, see: {}".format(url_loader))
 
     def __repr__(self):
         return self.name
