@@ -1,0 +1,17 @@
+{
+    "name": "subtlex-us-corpus",
+    "urls": [
+      {
+        "url": "http://www.lexique.org/databases/SUBTLEX-US/SUBTLEX-US-corpus.rds",
+        "bytes": 2005043
+      },
+      {
+        "url": "http://www.lexique.org/databases/SUBTLEX-US/Subtlex-US-corpus.txt.gz",
+        "bytes": 110422733
+      }
+    ],
+    "type": "tsv",
+    "tags": ["english", "frequencies"],
+    "description": "Subtlex-US-corpus gathers English and American movies and TV series subtitles (51 million words in total).",
+    "source": "https://www.ugent.be/pp/experimentele-psychologie/en/research/documents/subtlexus"
+}

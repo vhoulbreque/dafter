@@ -1,0 +1,17 @@
+{
+    "name": "megalex-visual",
+    "description": "Megalex-visual provides visual lexical decision times and accuracy rates for 28466 French words",
+    "source": "http://megalex.lexique.org",
+    "urls": [
+      {
+        "url": "http://www.lexique.org/databases/Megalex/Megalex-visual.rds",
+        "bytes": 1141855
+      },
+      {
+        "url": "http://www.lexique.org/databases/Megalex/Megalex-items-visual.tsv",
+        "bytes": 2609035
+      }
+    ],
+    "type": "tsv",
+    "tags": ["french", "frequencies"]
+}
