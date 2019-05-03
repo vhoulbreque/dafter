@@ -4,7 +4,7 @@
 import sys
 import argparse
 
-from dafter.fetcher.utils import get_config_dataset, get_version
+from dafter.fetcher.utils import get_version
 from dafter.fetcher.fetcher import get_dataset, delete_dataset, list_datasets, \
     info_dataset, search_datasets
 
@@ -54,9 +54,7 @@ class DafterCLI():
             self.parser.print_help()
             exit(1)
 
-        dataset_config = get_config_dataset(args.datasetname)
-        if dataset_config:
-            get_dataset(dataset_config)
+        get_dataset(args.datasetname)
 
     def delete(self):
         self.parser = argparse.ArgumentParser(description="Deletes the dataset files from the disk")
@@ -69,9 +67,7 @@ class DafterCLI():
             self.parser.print_help()
             exit(1)
 
-        dataset_config = get_config_dataset(args.datasetname)
-        if dataset_config:
-            delete_dataset(dataset_config)
+        delete_dataset(args.datasetname)
 
     def info(self):
         self.parser = argparse.ArgumentParser(description="Describes the dataset")
@@ -84,9 +80,7 @@ class DafterCLI():
             self.parser.print_help()
             exit(1)
 
-        dataset_config = get_config_dataset(args.datasetname)
-        if dataset_config:
-            info_dataset(dataset_config)
+        info_dataset(args.datasetname)
 
     def search(self):
         self.parser = argparse.ArgumentParser(description="Lists all the datasets available with these tags")

@@ -8,10 +8,10 @@ import shutil
 from .constants import DATASETS_FOLDER, DATASETS_CONFIG_FOLDER
 from .dataset import Dataset
 from .utils import is_dataset_in_db, normalize_name, is_dataset_being_downloaded, \
-    check_internet_connection
+    check_internet_connection, get_config_dataset
 
 
-def get_dataset(dataset_config):
+def get_dataset(datasetname):
     """Downloads the files of the dataset from the urls and saves them on the
     disk.
 
@@ -23,6 +23,12 @@ def get_dataset(dataset_config):
     Returns:
         None
     """
+
+    dataset_config = get_config_dataset(datasetname)
+    if dataset_config is None:
+        print("{} is not a valid dataset name, dataset url or "
+              "json file".format(datasetname))
+        return
 
     name = dataset_config["name"]
     urls = dataset_config["urls"]
@@ -44,7 +50,7 @@ def get_dataset(dataset_config):
               "Run \"dafter get {}\" to resume download".format(name))
 
 
-def delete_dataset(dataset_config):
+def delete_dataset(datasetname):
     """Deletes the files of the dataset located on the disk.
     Args:
         dataset_config (dict): The config of the dataset to delete, as stored
@@ -54,6 +60,11 @@ def delete_dataset(dataset_config):
     Returns:
         None
     """
+    dataset_config = get_config_dataset(datasetname)
+    if dataset_config is None:
+        print("Not a valid datasetname")
+        return
+
     name = dataset_config["name"]
 
     if not is_dataset_in_db(name):
@@ -194,7 +205,7 @@ def list_datasets(dataset_name, tags):
         print("\n".join(printed_list))
 
 
-def info_dataset(dataset_config):
+def info_dataset(datasetname):
     """Lists all the relevant information about a dataset. Prints these
     informations.
 
@@ -206,6 +217,10 @@ def info_dataset(dataset_config):
     Returns:
         None
     """
+    dataset_config = get_config_dataset(datasetname)
+    if dataset_config is None:
+        print("Not a valid datasetname")
+
     name = dataset_config["name"]
     urls = dataset_config["urls"]
     type = dataset_config["type"]

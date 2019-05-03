@@ -2,10 +2,32 @@
 # coding=utf-8
 
 import os
+import re
 import json
 import requests
 
 from .constants import DATASETS_FOLDER, DATASETS_CONFIG_FOLDER, VERSION_FILE
+
+
+def is_valid_url(s):
+    regex = re.compile(
+                    r'^(?:http|ftp)s?://' # http:// or https://
+                    r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|' #domain...
+                    r'localhost|' #localhost...
+                    r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ...or ip
+                    r'(?::\d+)?' # optional port
+                    r'(?:/?|[/?]\S+)$', re.IGNORECASE
+                    )
+    return re.match(regex, s) is not None
+
+
+def is_valid_path(s):
+    try:
+        if os.path.exists(s):
+            return True
+    except:
+        return False
+    return False
 
 
 def is_dataset_being_downloaded(datasetname):
@@ -93,18 +115,45 @@ def get_config_dataset(datasetname):
         config (dict): The configuration info about the dataset.
     """
 
-    for config_file in os.listdir(DATASETS_CONFIG_FOLDER):
-        cf = config_file.replace(".json", "")
-        if cf != datasetname:
-            continue
+    def is_valid_config(config):
+        fields = ["name", "urls", "type"]
+        for field in fields:
+            if field not in config:
+                return False
+        return True
 
-        config = None
-        config_file = os.path.join(DATASETS_CONFIG_FOLDER, config_file)
+    if is_valid_url(datasetname):
+        url = datasetname
+        r = requests.get(url=url)
+        if r.status_code == 200:
+            config = r.json()
+            if not is_valid_config(config):
+                print("There is a missing parameter in the config file")
+                config = None
+        else:
+            config = None
+    elif is_valid_path(datasetname):
+        config_file = datasetname
         with open(config_file) as f:
-            config = json.load(f)
-        return config
+            try:
+                config = json.load(f)
+                if not is_valid_config(config):
+                    print("There is a missing parameter in the config file")
+                    config = None
+            except:
+                config = None
+    else:
+        for config_file in os.listdir(DATASETS_CONFIG_FOLDER):
+            cf = config_file.replace(".json", "")
+            if cf != datasetname:
+                continue
 
-    return None
+            config = None
+            config_file = os.path.join(DATASETS_CONFIG_FOLDER, config_file)
+            with open(config_file) as f:
+                config = json.load(f)
+
+    return config
 
 
 def is_dataset_in_db(datasetname):
