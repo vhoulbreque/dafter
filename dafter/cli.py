@@ -40,6 +40,7 @@ class DafterCLI():
         exit(1)
 
     def version(self):
+        # TODO: does not work anymore
         v = get_version()
         print(v)
 
