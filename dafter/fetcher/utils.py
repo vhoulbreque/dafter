@@ -6,7 +6,7 @@ import re
 import json
 import requests
 
-from .constants import DATASETS_FOLDER, DATASETS_CONFIG_FOLDER, VERSION_FILE
+from .constants import DATASETS_FOLDER, DATASETS_CONFIG_FOLDER
 
 
 def is_valid_url(s):
@@ -251,9 +251,3 @@ def check_internet_connection():
     except requests.ConnectionError as e:
         return False
     return False
-
-
-def get_version():
-    with open(VERSION_FILE) as f:
-        version = [l.strip() for l in f][0]
-        return version

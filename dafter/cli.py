@@ -1,10 +1,12 @@
 #!/usr/bin/python
 # coding=utf-8
 
+__version__ = "0.2"
+
+
 import sys
 import argparse
 
-from dafter.fetcher.utils import get_version
 from dafter.fetcher.fetcher import get_dataset, delete_dataset, list_datasets, \
     info_dataset, search_datasets
 
@@ -40,9 +42,7 @@ class DafterCLI():
         exit(1)
 
     def version(self):
-        # TODO: does not work anymore
-        v = get_version()
-        print(v)
+        print(__version__)
 
     def get(self):
         self.parser = argparse.ArgumentParser(description="Downloads and saves the dataset files")
