@@ -6,7 +6,11 @@ dafter.egg-info
 
 *.pyc
 __pycache__/
+.pytest_cache
 data
 
 # MacOS
 .DS_Store
+
+# VSCode
+.vscode

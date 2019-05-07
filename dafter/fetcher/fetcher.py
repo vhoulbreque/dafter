@@ -8,10 +8,10 @@ import shutil
 from .constants import DATASETS_FOLDER, DATASETS_CONFIG_FOLDER
 from .dataset import Dataset
 from .utils import is_dataset_in_db, normalize_name, is_dataset_being_downloaded, \
-    check_internet_connection
+    check_internet_connection, get_config_dataset
 
 
-def get_dataset(dataset_config):
+def get_dataset(datasetname):
     """Downloads the files of the dataset from the urls and saves them on the
     disk.
 
@@ -23,28 +23,44 @@ def get_dataset(dataset_config):
     Returns:
         None
     """
+    if not isinstance(datasetname, str):
+        raise ValueError("datasetname must of type str, not {}".format(type(datasetname)))
+
+    dataset_config = get_config_dataset(datasetname)
+    if dataset_config is None:
+        print("{} is not a valid dataset name, dataset url or "
+              "json file".format(datasetname))
+        return None
 
     name = dataset_config["name"]
     urls = dataset_config["urls"]
-    type = dataset_config["type"]
 
     if not check_internet_connection():
         print("Check your internet connection. Cannot download {}".format(name))
-        return
+        return None
 
     if is_dataset_in_db(name) and not is_dataset_being_downloaded(name):
         print("The dataset has already been fetched")
-        return
+        return None
 
-    dataset = Dataset(name, urls, extension=type, save_path=DATASETS_FOLDER)
+    dataset = Dataset(name, urls, save_path=DATASETS_FOLDER)
     try:
+        print("Downloading {}...".format(dataset.name))
         dataset.download()
     except KeyboardInterrupt as e:
         print("\nThe download has been interrupted. "
               "Run \"dafter get {}\" to resume download".format(name))
+    except Exception as e:
+        print("Failed downloading {}".format(name))
+        print("The following exception occurred : ", e)
+    else:
+        print("The dataset has been stored in {}".format(dataset.save_folder))
+        return dataset
+
+    return None
 
 
-def delete_dataset(dataset_config):
+def delete_dataset(datasetname):
     """Deletes the files of the dataset located on the disk.
     Args:
         dataset_config (dict): The config of the dataset to delete, as stored
@@ -54,11 +70,19 @@ def delete_dataset(dataset_config):
     Returns:
         None
     """
+    if not isinstance(datasetname, str):
+        raise ValueError("datasetname must of type str, not {}".format(type(datasetname)))
+
+    dataset_config = get_config_dataset(datasetname)
+    if dataset_config is None:
+        print("Not a valid datasetname")
+        return None
+
     name = dataset_config["name"]
 
     if not is_dataset_in_db(name):
         print("The dataset is not in database")
-        return
+        return None
 
     name = normalize_name(name)
     name = os.path.join(DATASETS_FOLDER, name)
@@ -66,8 +90,11 @@ def delete_dataset(dataset_config):
         print("Deleting {}...".format(name))
         shutil.rmtree(name)
         print("The dataset has been deleted!")
+        return dataset_config
     except Exception as e:
         print("An exception occurred while deleting {}: {}".format(name, e))
+
+    return None
 
 
 def get_all_datasets():
@@ -116,6 +143,14 @@ def search_datasets(dataset_name, tags):
             status = " "
         return status
 
+    if not(dataset_name is None or isinstance(dataset_name, str)):
+        raise ValueError("dataset_name must be a str, not {}".format(type(dataset_name)))
+    
+    if not(tags is None or isinstance(tags, list)):
+        raise ValueError("tags must be a list of str, not {}".format(type(tags)))
+    elif tags and not all([isinstance(t, str) for t in tags]):
+        raise ValueError("the tags must be str, not {}".format(tags))
+
     if tags:
         tags = list(set(tags))
         tags = [t.strip() for t in tags]
@@ -123,6 +158,7 @@ def search_datasets(dataset_name, tags):
     if dataset_name:
         dataset_name = dataset_name.strip()
 
+    configs = []
     printed_list = []
     for config in get_all_datasets():
         config_tags = config["tags"]
@@ -134,9 +170,13 @@ def search_datasets(dataset_name, tags):
         status = get_status_icon(dn)
         printed_list.append("{} {}".format(status, dn))
 
+        configs.append(config)
+
     if printed_list:
         printed_list = sorted(printed_list)
         print("\n".join(printed_list))
+    
+    return configs
 
 
 def list_datasets(dataset_name, tags):
@@ -194,7 +234,7 @@ def list_datasets(dataset_name, tags):
         print("\n".join(printed_list))
 
 
-def info_dataset(dataset_config):
+def info_dataset(datasetname):
     """Lists all the relevant information about a dataset. Prints these
     informations.
 
@@ -206,6 +246,10 @@ def info_dataset(dataset_config):
     Returns:
         None
     """
+    dataset_config = get_config_dataset(datasetname)
+    if dataset_config is None:
+        print("Not a valid datasetname")
+
     name = dataset_config["name"]
     urls = dataset_config["urls"]
     type = dataset_config["type"]
