@@ -244,8 +244,39 @@ def info_dataset(datasetname):
             "dafter/datasets-configs"
 
     Returns:
-        None
+        dataset_info (dict): The info of the dataset to describe.
     """
+
+    def fit_description(s):
+
+        if not s:
+            return ""
+
+        LINE_SIZE = 80  # in chars
+
+        lines = s.split("\n")
+        final_lines = []
+        for line in lines:
+            if not line:
+                continue
+            line_s = line.split()
+            current_s = ""
+            for word in line_s:
+                if len(word) + len(current_s) + 1 <= LINE_SIZE:
+                    if current_s == "":
+                        current_s += word
+                    else:
+                        current_s += " " + word
+                else:
+                    final_lines.append(current_s)
+                    current_s = "" + word    
+            if current_s:
+                final_lines.append(current_s)
+                current_s = ""
+            final_lines[-1] = final_lines[-1] + "\n"
+
+        return "\n                ".join(final_lines)
+
     dataset_config = get_config_dataset(datasetname)
     if dataset_config is None:
         print("Not a valid datasetname")
@@ -255,7 +286,8 @@ def info_dataset(datasetname):
     type = dataset_config["type"]
     desc = dataset_config["description"]
     tags = dataset_config["tags"]
-    loader_url = "https://vinzeebreak.github.io/dafter-loader/docs/datasets/{}/".format(name)
+
+    desc = fit_description(desc)
 
     in_db = is_dataset_in_db(name)
     is_being_downloaded = is_dataset_being_downloaded(name)
@@ -267,10 +299,20 @@ def info_dataset(datasetname):
     else:
         status = "[NOT IN DATABASE - NOT BEING DOWNLOADED]"
 
-    print("status : {}".format(status))
-    print("name : {}".format(name))
-    print("urls : {}".format("\n".join([u["url"] for u in urls])))
-    print("type : {}".format(type))
-    print("description : {}".format(desc))
-    print("tags : {}".format(" - ".join(tags)))
-    print("How to load this dataset: {}".format(loader_url))
+    status_str = '{:<15} {:<12}'.format("status:", status)
+    name_str = '{:<15} {:<12}'.format("name:", name)
+    type_str = '{:<15} {:<12}'.format("type:", type)
+    desc_str = '{:<15} {:<12}'.format("description:", desc)
+    tags_str = '{:<15} {:<12}'.format("tags:", ", ".join(tags))
+
+    print("\n".join([name_str, type_str, desc_str, tags_str, status_str]))
+
+    dataset_info = {
+        "name": name,
+        "urls": urls,
+        "type": type,
+        "description": desc,
+        "tags": tags
+    }
+
+    return dataset_info

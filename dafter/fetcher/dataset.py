@@ -127,7 +127,6 @@ class Dataset:
                     saved_size = get_size_file(f_name)
                     if saved_size != total_bytes:
                         # Cannot take any risk: the file must be downloaded again
-                        print("HERE")
                         os.remove(f_name)
                     else:
                         continue
