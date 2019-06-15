@@ -34,7 +34,7 @@ class DafterCLI():
 
         if not (os.path.exists(DATASETS_FOLDER)):
             os.makedirs(DATASETS_FOLDER)
-            print("Folder for datasets not present, creating it at '%s'" % DATASETS_FOLDER)
+            print("Folder for datasets not present, creating it at {}".format(DATASETS_FOLDER))
 
         args = self.parser.parse_args(sys.argv[1:2])
 
