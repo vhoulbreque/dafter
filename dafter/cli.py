@@ -1,5 +1,8 @@
 #!/usr/bin/python
 # coding=utf-8
+import os
+
+from dafter.fetcher.constants import HOME, DATASETS_FOLDER
 
 __version__ = "0.2"
 
@@ -28,6 +31,10 @@ class DafterCLI():
     def __init__(self):
         self.parser = argparse.ArgumentParser(description=DESCRIPTION, usage=USAGE)
         self.parser.add_argument("command", help="Subcommand to run")
+
+        if not (os.path.exists(DATASETS_FOLDER)):
+            os.makedirs(DATASETS_FOLDER)
+            print("Folder for datasets not present, creating it at {}".format(DATASETS_FOLDER))
 
         args = self.parser.parse_args(sys.argv[1:2])
 
