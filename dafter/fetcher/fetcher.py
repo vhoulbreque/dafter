@@ -24,7 +24,8 @@ def get_dataset(datasetname):
         None
     """
     if not isinstance(datasetname, str):
-        raise ValueError("datasetname must of type str, not {}".format(type(datasetname)))
+        raise ValueError(
+            "datasetname must of type str, not {}".format(type(datasetname)))
 
     dataset_config = get_config_dataset(datasetname)
     if dataset_config is None:
@@ -71,7 +72,8 @@ def delete_dataset(datasetname):
         None
     """
     if not isinstance(datasetname, str):
-        raise ValueError("datasetname must of type str, not {}".format(type(datasetname)))
+        raise ValueError(
+            "datasetname must of type str, not {}".format(type(datasetname)))
 
     dataset_config = get_config_dataset(datasetname)
     if dataset_config is None:
@@ -144,10 +146,12 @@ def search_datasets(dataset_name, tags):
         return status
 
     if not(dataset_name is None or isinstance(dataset_name, str)):
-        raise ValueError("dataset_name must be a str, not {}".format(type(dataset_name)))
-    
+        raise ValueError(
+            "dataset_name must be a str, not {}".format(type(dataset_name)))
+
     if not(tags is None or isinstance(tags, list)):
-        raise ValueError("tags must be a list of str, not {}".format(type(tags)))
+        raise ValueError(
+            "tags must be a list of str, not {}".format(type(tags)))
     elif tags and not all([isinstance(t, str) for t in tags]):
         raise ValueError("the tags must be str, not {}".format(tags))
 
@@ -175,7 +179,7 @@ def search_datasets(dataset_name, tags):
     if printed_list:
         printed_list = sorted(printed_list)
         print("\n".join(printed_list))
-    
+
     return configs
 
 
@@ -248,7 +252,6 @@ def info_dataset(datasetname):
     """
 
     def fit_description(s):
-
         if not s:
             return ""
 
@@ -269,7 +272,7 @@ def info_dataset(datasetname):
                         current_s += " " + word
                 else:
                     final_lines.append(current_s)
-                    current_s = "" + word    
+                    current_s = "" + word
             if current_s:
                 final_lines.append(current_s)
                 current_s = ""
@@ -280,6 +283,7 @@ def info_dataset(datasetname):
     dataset_config = get_config_dataset(datasetname)
     if dataset_config is None:
         print("Not a valid datasetname")
+        return None
 
     name = dataset_config["name"]
     urls = dataset_config["urls"]
@@ -293,11 +297,11 @@ def info_dataset(datasetname):
     is_being_downloaded = is_dataset_being_downloaded(name)
 
     if in_db and not is_being_downloaded:
-        status = "[IN DATABASE]"
+        status = "✅ [IN DATABASE]"
     elif in_db and is_being_downloaded:
-        status = "[BEING DOWNLOADED]"
+        status = "📥 [DOWNLOADING]"
     else:
-        status = "[NOT IN DATABASE - NOT BEING DOWNLOADED]"
+        status = "❌ [NOT IN DATABASE]"
 
     status_str = '{:<15} {:<12}'.format("status:", status)
     name_str = '{:<15} {:<12}'.format("name:", name)
