@@ -98,9 +98,7 @@ def is_dataset_being_downloaded(datasetname):
                 return True
             for u_ in config["urls"]:
                 file_path = os.path.join(os.path.join(DATASETS_FOLDER, folder, normalize_filename(u_["url"])))
-                print(file_path)
                 if not os.path.isfile(file_path):
-                    print("HERE")
                     return True
 
             # Third, if all the files have been downloaded, 

@@ -26,15 +26,18 @@ Positional arguments:
   version                                        Get the version of dafter
 """
 
+
 class DafterCLI():
 
     def __init__(self):
-        self.parser = argparse.ArgumentParser(description=DESCRIPTION, usage=USAGE)
+        self.parser = argparse.ArgumentParser(
+            description=DESCRIPTION, usage=USAGE)
         self.parser.add_argument("command", help="Subcommand to run")
 
         if not (os.path.exists(DATASETS_FOLDER)):
             os.makedirs(DATASETS_FOLDER)
-            print("Folder for datasets not present, creating it at {}".format(DATASETS_FOLDER))
+            print("Folder for datasets not present, creating it at {}".format(
+                DATASETS_FOLDER))
 
         args = self.parser.parse_args(sys.argv[1:2])
 
@@ -52,7 +55,8 @@ class DafterCLI():
         print(__version__)
 
     def get(self):
-        self.parser = argparse.ArgumentParser(description="Downloads and saves the dataset files")
+        self.parser = argparse.ArgumentParser(
+            description="Downloads and saves the dataset files")
         self.parser.add_argument('datasetname', help="Name of the dataset")
 
         args = self.parser.parse_args(sys.argv[2:])
@@ -65,7 +69,8 @@ class DafterCLI():
         get_dataset(args.datasetname)
 
     def delete(self):
-        self.parser = argparse.ArgumentParser(description="Deletes the dataset files from the disk")
+        self.parser = argparse.ArgumentParser(
+            description="Deletes the dataset files from the disk")
         self.parser.add_argument('datasetname', help="Name of the dataset")
 
         args = self.parser.parse_args(sys.argv[2:])
@@ -78,7 +83,8 @@ class DafterCLI():
         delete_dataset(args.datasetname)
 
     def info(self):
-        self.parser = argparse.ArgumentParser(description="Describes the dataset")
+        self.parser = argparse.ArgumentParser(
+            description="Describes the dataset")
         self.parser.add_argument('datasetname', help="Name of the dataset")
 
         args = self.parser.parse_args(sys.argv[2:])
@@ -91,28 +97,37 @@ class DafterCLI():
         info_dataset(args.datasetname)
 
     def search(self):
-        self.parser = argparse.ArgumentParser(description="Lists all the datasets available with these tags")
-        self.parser.add_argument("datasetname", help="keyword", nargs="?", default=None)
-        self.parser.add_argument('--tags', help="tags", nargs='+', required=False)
+        self.parser = argparse.ArgumentParser(
+            description="Lists all the datasets available with these tags")
+        self.parser.add_argument(
+            "datasetname", help="keyword", nargs="?", default=None)
+        self.parser.add_argument(
+            '--tags', help="tags", nargs='+', required=False)
 
         args = self.parser.parse_args(sys.argv[2:])
 
-        datasetname = args.datasetname if hasattr(args, "datasetname") else None
+        datasetname = args.datasetname if hasattr(
+            args, "datasetname") else None
         tags = args.tags if args.tags else []
 
         search_datasets(datasetname, tags)
 
     def list(self):
-        self.parser = argparse.ArgumentParser(description="Lists all the datasets that are in database")
-        self.parser.add_argument("datasetname", help="keyword", nargs="?", default=None)
-        self.parser.add_argument('--tags', help="tags", nargs='+', required=False)
+        self.parser = argparse.ArgumentParser(
+            description="Lists all the datasets that are in database")
+        self.parser.add_argument(
+            "datasetname", help="keyword", nargs="?", default=None)
+        self.parser.add_argument(
+            '--tags', help="tags", nargs='+', required=False)
 
         args = self.parser.parse_args(sys.argv[2:])
 
-        datasetname = args.datasetname if hasattr(args, "datasetname") else None
+        datasetname = args.datasetname if hasattr(
+            args, "datasetname") else None
         tags = args.tags if hasattr(args, "tags") else []
 
         list_datasets(datasetname, tags)
+
 
 def main():
     DafterCLI()
